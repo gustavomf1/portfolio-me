@@ -111,7 +111,10 @@ export const projects: Project[] = [
         "Lances em tempo real com WebSocket/STOMP + RabbitMQ (AMQP).",
         "Cache distribuído em Redis.",
         "Regras financeiras: PIX, faturas, taxas, comissões e fechamento de leilão.",
-        "Painel admin em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB."
+        "Painel admin em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB.",
+        "Dashboard com movimentação bruta, lotes e animais vendidos, e vendas por sexo e por raça.",
+        "Geração da nota de leilão em PDF (contrato de compra e venda com comissões de comprador e vendedor).",
+        "Módulo de comunicação por WhatsApp: envio individual e em massa, de texto e mídia."
       ],
       "decisoes": [
         "Operações financeiras com @Transactional.",
@@ -120,7 +123,33 @@ export const projects: Project[] = [
       ],
       "resultado": "Fluxo de leilão completo, do lance ao fechamento financeiro."
     },
-    "slot": "leilao.png"
+    "slot": "leilao.png",
+    "prints": [
+      {
+        "src": "/assets/projects/erp-2-dashboard.png",
+        "alt": "Dashboard do ERP de leilões com movimentação bruta e vendas por sexo e raça"
+      },
+      {
+        "src": "/assets/projects/erp-4-lotes.png",
+        "alt": "Monitor de lotes de um leilão com status, preço atual e progresso de vendas"
+      },
+      {
+        "src": "/assets/projects/erp-3-clientes.png",
+        "alt": "Cadastro de clientes com busca, paginação e ações (dados anonimizados)"
+      },
+      {
+        "src": "/assets/projects/erp-5-nota.png",
+        "alt": "Nota de leilão em PDF: contrato de compra e venda com comissões (dados anonimizados)"
+      },
+      {
+        "src": "/assets/projects/erp-6-whatsapp.png",
+        "alt": "Módulo de comunicação por WhatsApp com envio individual e em massa"
+      },
+      {
+        "src": "/assets/projects/erp-1-login.png",
+        "alt": "Tela de login do ERP de leilões"
+      }
+    ]
   },
   {
     "slug": "fintrack-ai",
