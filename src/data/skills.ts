@@ -288,6 +288,10 @@ export const skillGroups: SkillGroup[] = [
       {
         "nome": "Vercel",
         "nivel": "Confortável"
+      },
+      {
+        "nome": "Deploy em VPS (SSH + Docker Compose)",
+        "nivel": "Confortável"
       }
     ]
   },

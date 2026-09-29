@@ -28,7 +28,10 @@ export const projects: Project[] = [
       "Tailwind",
       "Flutter",
       "AWS S3",
-      "Claude API"
+      "Claude API",
+      "GitHub Actions",
+      "Docker",
+      "GHCR"
     ],
     "links": {
       "privado": true
@@ -42,13 +45,18 @@ export const projects: Project[] = [
         "Arquitetura multi-tenant com RBAC.",
         "Busca e extração de trechos relevantes em normas com Claude Haiku 4.5.",
         "Extração de resumos de PDFs guiada por prompt livre do usuário.",
-        "App mobile em Flutter com upload de evidências (câmera + geolocalização) para AWS S3."
+        "App mobile em Flutter com upload de evidências (câmera + geolocalização) para AWS S3.",
+        "CI/CD com GitHub Actions nos três repositórios (API, web e backend mobile): build e testes a cada push e pull request; API com JDK 21 e Maven, web com Node 22 e checagem de tipos no build.",
+        "CD encadeado ao CI: com o CI verde na master, o pipeline constrói a imagem Docker, publica no GHCR (tags latest e o SHA do commit) e faz o deploy automático em VPS via SSH com Docker Compose.",
+        "Operação em produção: Docker Compose com PostgreSQL 16 e mensageria, web servida por nginx e script de backup do PostgreSQL com retenção de 7 dias."
       ],
       "decisoes": [
         "Notificações assíncronas com @Async + @TransactionalEventListener, disparadas só após o commit.",
         "Prompt iterado para retornar todos os trechos pertinentes; max_tokens ajustado de 1024 para 4096.",
         "Sanitização da resposta do modelo para JSON antes de qualquer uso.",
-        "Timeouts alinhados entre nginx e axios para respostas de 30 a 40 s."
+        "Timeouts alinhados entre nginx e axios para respostas de 30 a 40 s.",
+        "O CI da API sobe PostgreSQL e MinIO (S3 compatível) via Docker Compose e cria a role restrita safecore_app, para os testes rodarem com o mesmo usuário de menor privilégio da produção.",
+        "Deploy só depois do CI passar (workflow_run), com imagem versionada pelo SHA para permitir rollback."
       ],
       "resultado": "Produto em produção e base de uma proposta enterprise com cliente real do setor aeroportuário."
     },
