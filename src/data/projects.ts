@@ -329,12 +329,7 @@ export const projects: Project[] = [
       "JWT"
     ],
     "links": {
-      "repo": [
-        {
-          "label": "Insight-flow-backend",
-          "url": "https://github.com/InsightF-AI/Insight-flow-backend"
-        }
-      ]
+      "privado": true
     },
     "briefing": {
       "contexto": "Projeto em equipe (organização InsightF-AI no GitHub), consumido por clientes web, mobile e desktop.",

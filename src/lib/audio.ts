@@ -100,6 +100,7 @@ export function createAudioEngine(deps: Deps) {
       }
       if (ctx && ctx.state === 'suspended') void ctx.resume();
       if (!muted && media && media.paused) fadeMusicIn();
+      emit();
     },
     play,
     setMuted(m: boolean) {

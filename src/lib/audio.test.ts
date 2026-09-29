@@ -47,6 +47,14 @@ test('isUnlocked só fica verdadeiro depois do primeiro unlock', () => {
   expect(eng.isUnlocked()).toBe(true);
 });
 
+test('unlock avisa os assinantes (para o botão de som refletir que a música começou)', () => {
+  const eng = createAudioEngine(deps(fakeMedia(false)));
+  const fn = vi.fn();
+  eng.subscribe(fn);
+  eng.unlock();
+  expect(fn).toHaveBeenCalled();
+});
+
 test('música inicia com volume 0 e usa loop', () => {
   const el = fakeMedia(false);
   const eng = createAudioEngine(deps(el));

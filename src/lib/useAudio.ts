@@ -4,10 +4,11 @@ import { audio } from './audio';
 
 export function useAudio() {
   const muted = useSyncExternalStore(audio.subscribe, audio.isMuted, () => false);
+  const unlocked = useSyncExternalStore(audio.subscribe, audio.isUnlocked, () => false);
   useEffect(() => {
     const onVis = () => (document.hidden ? audio.pauseForBackground() : audio.resumeFromBackground());
     document.addEventListener('visibilitychange', onVis);
     return () => document.removeEventListener('visibilitychange', onVis);
   }, []);
-  return { muted, toggle: () => audio.setMuted(!audio.isMuted()), unlock: audio.unlock, play: audio.play };
+  return { muted, unlocked, toggle: () => audio.setMuted(!audio.isMuted()), unlock: audio.unlock, play: audio.play };
 }

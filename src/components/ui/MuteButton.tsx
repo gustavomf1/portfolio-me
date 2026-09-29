@@ -1,25 +1,27 @@
 'use client';
-import { audio } from '@/lib/audio';
 import { useAudio } from '@/lib/useAudio';
 
+// Liga/desliga a música de fundo. Antes do primeiro clique nada toca (o navegador exige um gesto),
+// então o botão aparece como "desligado" e o primeiro clique inicia a trilha.
 export function MuteButton() {
-  const { muted, toggle, unlock } = useAudio();
+  const { muted, unlocked, toggle, unlock } = useAudio();
+  const playing = unlocked && !muted;
   return (
     <button
       type="button"
       onClick={() => {
-        // Primeiro clique com o som "ligado" só inicia a trilha; senão o visitante que quer som ficaria mudo.
-        const startOnly = !audio.isUnlocked() && !audio.isMuted();
+        if (playing) { toggle(); return; }
         unlock();
-        if (!startOnly) toggle();
+        if (muted) toggle(); // estava silenciado por preferência salva: reativa
       }}
-      aria-label={muted ? 'Ativar som' : 'Desativar som'}
-      aria-pressed={!muted}
-      className="fixed bottom-4 left-4 z-[250] grid h-11 w-11 place-items-center border border-blood bg-void/80 text-bone backdrop-blur hover:shadow-[0_0_18px_rgba(225,6,0,.5)]"
+      aria-label={playing ? 'Desativar som' : 'Ativar som'}
+      aria-pressed={playing}
+      title={playing ? 'Desativar som' : 'Ativar som'}
+      className="grid h-[38px] w-[38px] shrink-0 cursor-pointer place-items-center border border-blood/60 text-bone hover:border-ember hover:shadow-[0_0_14px_rgba(225,6,0,.5)]"
     >
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
-        {muted ? <path d="M17 9l5 6M22 9l-5 6" stroke="#ff2a1f" /> : <path d="M16 8a5 5 0 010 8M19 5a9 9 0 010 14" />}
+        {playing ? <path d="M16 8a5 5 0 010 8M19 5a9 9 0 010 14" /> : <path d="M17 9l5 6M22 9l-5 6" stroke="#ff2a1f" />}
       </svg>
     </button>
   );

@@ -2,6 +2,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useAudio } from '@/lib/useAudio';
 import { Logo } from './Logo';
+import { MuteButton } from './MuteButton';
 
 export const SECTIONS = [
   { id: 'inicio', label: 'Início' },
@@ -46,14 +47,17 @@ export function Nav() {
       className="fixed inset-x-0 top-0 z-[200] flex h-[68px] items-center justify-between gap-5 border-b border-blood/30 bg-void/75 px-[clamp(16px,4vw,40px)] backdrop-blur-md"
     >
       <Logo />
-      <button
-        type="button"
-        onClick={() => { play('door'); window.dispatchEvent(new Event('sith:open-terminal')); }}
-        aria-label="Abrir terminal"
-        className="ml-auto hidden h-[38px] items-center border border-blood/60 px-3 font-mono text-xs tracking-[.1em] text-bone hover:border-ember md:flex"
-      >
-        &gt;_ TERMINAL
-      </button>
+      <div className="ml-auto flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => { play('door'); window.dispatchEvent(new Event('sith:open-terminal')); }}
+          aria-label="Abrir terminal"
+          className="hidden h-[38px] cursor-pointer items-center border border-blood/60 px-3 font-mono text-xs tracking-[.1em] text-bone hover:border-ember md:flex"
+        >
+          &gt;_ TERMINAL
+        </button>
+        <MuteButton />
+      </div>
       <button
         type="button"
         className="md:hidden grid h-10 w-10 place-items-center"
