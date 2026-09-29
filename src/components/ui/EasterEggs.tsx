@@ -1,16 +1,18 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
+import { profile } from '@/data/profile';
 import { createSequenceMatcher, KONAMI, SITH } from '@/lib/easter-eggs';
 import { useAudio } from '@/lib/useAudio';
 import { Terminal } from './Terminal';
 import { toast } from './Toast';
 
 const ASCII = `
-   ▄████▄   ██▓ ▄▄▄█████▓ ██░ ██
-  ▒██▀ ▀█  ▓██▒ ▓  ██▒ ▓▒▓██░ ██▒
-  ▒▓█    ▄ ▒██▒ ▒ ▓██░ ▒░▒██▀▀██░
-  ▒▓▓▄ ▄██▒░██░ ░ ▓██▓ ░ ░▓█ ░██
-  ▒ ▓███▀ ░░██░   ▒██▒ ░ ░▓█▒░██▓
+ ███████╗██╗████████╗██╗  ██╗
+ ██╔════╝██║╚══██╔══╝██║  ██║
+ ███████╗██║   ██║   ███████║
+ ╚════██║██║   ██║   ██╔══██║
+ ███████║██║   ██║   ██║  ██║
+ ╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝
 `;
 
 export function EasterEggs() {
@@ -22,7 +24,7 @@ export function EasterEggs() {
     // Console para quem inspeciona a página.
     console.log('%c' + ASCII, 'color:#e10600;font-family:monospace');
     console.log('%cVocê inspeciona o código. Gostamos de você.', 'color:#ff2a1f;font-weight:bold;font-size:14px');
-    console.log('%cEstou contratando a mim mesmo por uma boa vaga: gustavo_mf1@hotmail.com', 'color:#9a9a9a');
+    console.log(`%cGostou do que viu? Estou aberto a novas oportunidades: ${profile.email}`, 'color:#9a9a9a');
   }, []);
 
   useEffect(() => {
