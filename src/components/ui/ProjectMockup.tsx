@@ -12,7 +12,7 @@ export function ProjectMockup({ project }: { project: Project }) {
   const bars = Array.from({ length: 6 }, (_, i) => 20 + ((h >> i) % 60));
   const line = Array.from({ length: 8 }, (_, i) => `${i * 30 + 20},${90 - ((h >> (i + 2)) % 55)}`).join(' ');
   return (
-    <svg viewBox="0 0 280 170" role="img" aria-label={`Ilustração de tela do projeto ${project.nome}`} className="h-full w-full">
+    <svg viewBox="0 0 280 170" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`Ilustração de tela do projeto ${project.nome}`} className="h-full w-full">
       <rect width="280" height="170" fill="#0b0b0b" />
       <rect x="0" y="0" width="280" height="20" fill="#141414" />
       {[0, 1, 2].map((i) => <circle key={i} cx={12 + i * 12} cy="10" r="3" fill={i === 0 ? '#e10600' : '#3a3a3a'} />)}

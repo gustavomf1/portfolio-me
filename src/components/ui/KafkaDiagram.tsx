@@ -13,7 +13,7 @@ const hub = { x: 200, y: 85 };
 export function KafkaDiagram() {
   const reduced = useReducedMotion();
   return (
-    <svg viewBox="0 0 400 170" role="img" aria-label="Diagrama: gateway BFF, cotação, proposta e report trocam eventos através do Apache Kafka" className="h-full w-full">
+    <svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Diagrama: gateway BFF, cotação, proposta e report trocam eventos através do Apache Kafka" className="h-full w-full">
       <rect width="400" height="170" fill="#0a0a0a" />
       {nodes.map((n, i) => {
         const path = `M${n.x},${n.y} L${hub.x},${hub.y}`;
