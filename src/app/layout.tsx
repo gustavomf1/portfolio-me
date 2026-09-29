@@ -9,10 +9,11 @@ const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
 const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 export const metadata: Metadata = {
-  // TROCAR pela URL final do site (usada nas imagens Open Graph).
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
+  // URL final do site (imagens Open Graph e canonical). Sobrescreva com NEXT_PUBLIC_SITE_URL se mudar o domínio.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://gustavofranca.dev'),
   title: 'Gustavo Martins França · Engenheiro de Software Full Stack',
   description: 'Portfolio de Gustavo Martins França, engenheiro de software full stack: TypeScript, Java, PostgreSQL e IA generativa em produção.',
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'Gustavo Martins França · Engenheiro de Software Full Stack',
     description: 'Construo sistemas que resistem à escuridão.',

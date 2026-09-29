@@ -21,7 +21,7 @@ Tudo em `src/data/*.ts` (perfil, projetos, skills, experiência, pipeline de IA)
 | O quê | Onde |
 | --- | --- |
 | Currículo (PDF) | edite `docs/curriculo/curriculo.html` e gere de novo o PDF em `public/Curriculo-Gustavo-Martins-Franca.pdf` (instruções no comentário do HTML) |
-| URL final do site (Open Graph) | variável `NEXT_PUBLIC_SITE_URL` |
+| URL do site (Open Graph e canonical) | padrão `https://gustavofranca.dev`; mude com `NEXT_PUBLIC_SITE_URL` |
 | Prints dos projetos | coloque em `public/assets/projects/` e preencha `imagem` em `src/data/projects.ts` (o campo `slot` sugere o nome do arquivo). Sem `imagem`, o card mostra um mockup SVG |
 
 ## Áudio e direitos
@@ -34,9 +34,21 @@ Tudo em `src/data/*.ts` (perfil, projetos, skills, experiência, pipeline de IA)
 
 Código Konami, 5 cliques no logo, digitar `sith` (abre o terminal) e o console do navegador.
 
-## Deploy
+## Deploy no Cloudflare Pages (gustavofranca.dev)
 
-- **Vercel:** importe o repositório; framework Next.js, sem configuração extra.
-- **GitHub Pages:** publique a pasta `out/` (já inclui `.nojekyll`). Em subcaminho (`usuario.github.io/repo`), rode o build com `NEXT_PUBLIC_BASE_PATH=/repo npm run build`; a trilha de áudio e o currículo respeitam esse prefixo. Prints em `imagem` (`src/data/projects.ts`) devem usar `asset('/assets/projects/...')` de `src/lib/paths.ts`.
+1. Suba o repositório para o GitHub.
+2. Cloudflare → *Workers & Pages* → *Create* → *Pages* → *Connect to Git* e escolha o repositório.
+3. Configuração do build:
+   - **Framework preset:** Next.js (Static HTML Export)
+   - **Build command:** `npm run build`
+   - **Build output directory:** `out`
+   - **Variáveis de ambiente:** `NODE_VERSION=22` (o `.nvmrc` também fixa isso) e `NEXT_PUBLIC_SITE_URL=https://gustavofranca.dev`
+4. Depois do primeiro deploy: *Custom domains* → *Set up a custom domain* → `gustavofranca.dev`. Se o domínio estiver no Cloudflare, o DNS é criado sozinho; se não, aponte os nameservers para o Cloudflare (ou crie um CNAME para o endereço `*.pages.dev`).
+5. Adicione também `www.gustavofranca.dev` e crie um redirecionamento (*Bulk Redirects* ou uma regra de página) de `www` para o domínio principal.
+6. `.dev` exige HTTPS; o Cloudflare emite o certificado automaticamente.
+
+`public/_headers` define o cache dos arquivos e o tipo da imagem de compartilhamento. Ao mudar o domínio, atualize também `public/robots.txt` e `public/sitemap.xml`.
+
+Outras opções: **Vercel** (importe o repositório, sem configuração extra) ou **GitHub Pages** (publique `out/`; em subcaminho use `NEXT_PUBLIC_BASE_PATH=/repo npm run build`).
 
 Projeto de fã, sem afiliação com Lucasfilm ou Disney.
