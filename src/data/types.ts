@@ -8,6 +8,7 @@ export type Project = {
   selo?: string;
   resumo: string;
   stack: string[];
+  // demo: link para a aplicação no ar; privado: mostra o cadeado de repositório privado
   links: { repo?: { label: string; url: string }[]; demo?: string; privado?: boolean };
   briefing: {
     contexto: string;

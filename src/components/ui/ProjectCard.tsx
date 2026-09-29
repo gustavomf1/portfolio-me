@@ -51,15 +51,28 @@ export function ProjectCard({ project, onOpen }: { project: Project; onOpen: () 
           {shown.map((s) => <li key={s} className="chip">{s}</li>)}
           {project.stack.length > shown.length && <li className="chip">+{project.stack.length - shown.length}</li>}
         </ul>
-        {/* O ::after estica o botão sobre o card inteiro: clicar em qualquer ponto também abre os detalhes. */}
-        <button
-          type="button"
-          onClick={onOpen}
-          aria-label={`Ver detalhes técnicos de ${project.nome}`}
-          className="mt-2 flex w-fit cursor-pointer items-center gap-2 border border-sith px-4 py-2.5 font-mono text-xs uppercase tracking-[.16em] text-bone transition-shadow after:absolute after:inset-0 group-hover:bg-sith/15 group-hover:shadow-[0_0_16px_rgba(225,6,0,.5)]"
-        >
-          Ver detalhes técnicos <span aria-hidden="true">→</span>
-        </button>
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          {/* O ::after estica o botão sobre o card inteiro: clicar em qualquer ponto também abre os detalhes. */}
+          <button
+            type="button"
+            onClick={onOpen}
+            aria-label={`Ver detalhes técnicos de ${project.nome}`}
+            className="flex w-fit cursor-pointer items-center gap-2 border border-sith px-4 py-2.5 font-mono text-xs uppercase tracking-[.16em] text-bone transition-shadow after:absolute after:inset-0 group-hover:bg-sith/15 group-hover:shadow-[0_0_16px_rgba(225,6,0,.5)]"
+          >
+            Ver detalhes técnicos <span aria-hidden="true">→</span>
+          </button>
+          {project.links.demo && (
+            <a
+              href={project.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Acessar a aplicação ${project.nome} (abre em nova aba)`}
+              className="relative z-10 flex items-center gap-2 border border-ash/40 px-4 py-2.5 font-mono text-xs uppercase tracking-[.16em] text-bone hover:border-ember hover:text-bone"
+            >
+              Acessar aplicação <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );

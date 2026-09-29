@@ -101,6 +101,9 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
           <Bloco titulo="RESULTADO"><p className="m-0 leading-relaxed text-[#d8d3ce]">{b.resultado}</p></Bloco>
           <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">{project.stack.map((s) => <li key={s} className="chip">{s}</li>)}</ul>
           <div className="flex flex-wrap items-center gap-3.5 border-t border-blood/30 pt-5">
+            {project.links.demo && (
+              <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Acessar aplicação ↗</a>
+            )}
             {project.links.repo?.map((l) => (
               <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="btn">{l.label} ↗</a>
             ))}

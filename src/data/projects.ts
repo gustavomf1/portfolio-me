@@ -178,7 +178,8 @@ export const projects: Project[] = [
           "label": "fintrack-ai",
           "url": "https://github.com/gustavomf1/fintrack-ai"
         }
-      ]
+      ],
+      "demo": "https://fintrack-ai-frontend-pi.vercel.app/login"
     },
     "briefing": {
       "contexto": "Aplicação de finanças pessoais com design dark próprio, construída para explorar IA aplicada a dados do usuário.",
@@ -198,7 +199,17 @@ export const projects: Project[] = [
       ],
       "resultado": "Duas funcionalidades de IA integradas ao fluxo do produto, com saída validada de ponta a ponta."
     },
-    "slot": "fintrack.png"
+    "slot": "fintrack.png",
+    "prints": [
+      {
+        "src": "/assets/projects/fintrack-1-dashboard.png",
+        "alt": "Dashboard do FinTrack com gastos do mês, nova transação, análise da IA e transações recentes"
+      },
+      {
+        "src": "/assets/projects/fintrack-2-login.png",
+        "alt": "Tela de login do FinTrack AI"
+      }
+    ]
   },
   {
     "slug": "microsservicos-event-driven",
