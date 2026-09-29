@@ -7,6 +7,8 @@ import { Identificacao } from '@/components/sections/Identificacao';
 import { Missoes } from '@/components/sections/Missoes';
 import { Campanhas } from '@/components/sections/Campanhas';
 import { DestaqueIA } from '@/components/sections/DestaqueIA';
+import { Comunicacao } from '@/components/sections/Comunicacao';
+import { Footer } from '@/components/sections/Footer';
 import { Arsenal } from '@/components/sections/Arsenal';
 
 export default function Home() {
@@ -24,7 +26,9 @@ export default function Home() {
         <Missoes />
         <Campanhas />
         <DestaqueIA />
+        <Comunicacao />
       </main>
+      <Footer />
     </>
   );
 }
