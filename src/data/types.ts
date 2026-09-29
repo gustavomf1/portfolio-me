@@ -18,7 +18,8 @@ export type Project = {
   };
   diagrama?: boolean; // mostra o diagrama animado de eventos (Kafka)
   slot?: string; // nome sugerido do print em public/assets/projects/
-  imagem?: string; // SLOT DE IMAGEM: caminho do print, ex.: '/assets/projects/safecore.png'
+  imagem?: string;
+  prints?: { src: string; alt: string }[]; // galeria de telas (a 1ª aparece no card) // SLOT DE IMAGEM: caminho do print, ex.: '/assets/projects/safecore.png'
 };
 
 export type SkillLevel = 'Dia a dia' | 'Confortável' | 'Estudando';

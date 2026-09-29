@@ -1,6 +1,8 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { Project } from '@/data/types';
+import { asset } from '@/lib/paths';
 import { useAudio } from '@/lib/useAudio';
 import { Lock, ProjectVisual } from './ProjectCard';
 
@@ -19,6 +21,7 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
   const { play } = useAudio();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const [sel, setSel] = useState({ slug: '', i: 0 }); // tela escolhida na galeria (volta para a 1ª ao trocar de projeto)
 
   useEffect(() => {
     if (!project) return;
@@ -46,7 +49,10 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
 
   if (!project) return null;
   const b = project.briefing;
-  return (
+  const prints = project.prints ?? [];
+  const shotIndex = sel.slug === project.slug ? sel.i : 0;
+  // Portal no body: dentro do <main> o modal ficaria abaixo do menu fixo e do grão/scanlines.
+  return createPortal(
     <div className="fixed inset-0 z-[9000] grid place-items-center bg-void/85 p-4 backdrop-blur-sm" style={{ animation: 'fadeIn .25s both' }} onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}>
       <div
         ref={dialogRef}
@@ -57,7 +63,27 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
         style={{ animation: 'modalIn .35s both', boxShadow: '0 0 60px rgba(225,6,0,.25)' }}
       >
         <button ref={closeRef} type="button" onClick={onClose} aria-label="Fechar briefing" className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center border border-blood bg-void/85 text-bone hover:border-ember">✕</button>
-        <div className="h-[220px] w-full overflow-hidden border-b border-blood/40"><ProjectVisual project={project} /></div>
+        <div className={`w-full overflow-hidden border-b border-blood/40 bg-void ${prints.length ? 'h-[clamp(220px,42vw,420px)] [&_img]:!object-contain' : 'h-[220px]'}`}>
+          <ProjectVisual project={project} index={shotIndex} />
+        </div>
+        {prints.length > 1 && (
+          <ul aria-label="Telas do projeto" className="m-0 flex list-none gap-2 overflow-x-auto border-b border-blood/40 bg-abyss p-3">
+            {prints.map((p, i) => (
+              <li key={p.src} className="shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setSel({ slug: project.slug, i })}
+                  aria-label={`Ver tela ${i + 1}: ${p.alt}`}
+                  aria-current={i === shotIndex}
+                  className={`block h-16 w-28 cursor-pointer overflow-hidden border ${i === shotIndex ? 'border-ember shadow-[0_0_10px_rgba(225,6,0,.5)]' : 'border-blood/50 opacity-70 hover:opacity-100'}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={asset(p.src)} alt="" className="h-full w-full object-cover object-top" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="flex flex-col gap-7 p-[clamp(20px,4vw,40px)]">
           <header className="flex flex-col gap-2.5">
             <span className="font-mono text-[13px] tracking-[.24em] text-sith">BRIEFING DE MISSÃO</span>
@@ -84,6 +110,7 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

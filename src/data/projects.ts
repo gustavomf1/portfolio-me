@@ -31,12 +31,6 @@ export const projects: Project[] = [
       "Claude API"
     ],
     "links": {
-      "repo": [
-        {
-          "label": "safecore-mobile",
-          "url": "https://github.com/gustavomf1/safecore-mobile"
-        }
-      ],
       "privado": true
     },
     "briefing": {
@@ -58,7 +52,25 @@ export const projects: Project[] = [
       ],
       "resultado": "Produto em produção e base de uma proposta enterprise com cliente real do setor aeroportuário."
     },
-    "slot": "safecore.png"
+    "slot": "safecore.png",
+    "prints": [
+      {
+        "src": "/assets/projects/safecore-1-login.png",
+        "alt": "Tela de login do SafeCore, com o painel de apresentação do produto"
+      },
+      {
+        "src": "/assets/projects/safecore-2-ocorrencias.png",
+        "alt": "Lista de ocorrências do SafeCore com filtros por status e papel"
+      },
+      {
+        "src": "/assets/projects/safecore-3-detalhe.png",
+        "alt": "Detalhe de uma Não Conformidade com matriz de risco e responsáveis"
+      },
+      {
+        "src": "/assets/projects/safecore-4-cinco-porques.png",
+        "alt": "Análise de causa raiz (5 porquês) e plano de atividades aprovado"
+      }
+    ]
   },
   {
     "slug": "erp-de-leiloes",

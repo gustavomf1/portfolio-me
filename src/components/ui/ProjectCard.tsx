@@ -1,5 +1,6 @@
 'use client';
 import type { Project } from '@/data/types';
+import { asset } from '@/lib/paths';
 import { useAudio } from '@/lib/useAudio';
 import { useTilt } from '@/lib/useTilt';
 import { KafkaDiagram } from './KafkaDiagram';
@@ -13,10 +14,12 @@ export function Lock() {
   );
 }
 
-export function ProjectVisual({ project }: { project: Project }) {
-  if (project.imagem) {
+// Imagem do projeto: `prints` (galeria) ou `imagem`; sem nenhuma, mockup SVG (ou o diagrama de eventos).
+export function ProjectVisual({ project, index = 0 }: { project: Project; index?: number }) {
+  const shot = project.prints?.[index] ?? (project.imagem ? { src: project.imagem, alt: `Tela do projeto ${project.nome}` } : null);
+  if (shot) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={project.imagem} alt={`Tela do projeto ${project.nome}`} loading="lazy" className="h-full w-full object-cover" />;
+    return <img src={asset(shot.src)} alt={shot.alt} loading="lazy" className="h-full w-full object-cover object-top" />;
   }
   return project.diagrama ? <KafkaDiagram /> : <ProjectMockup project={project} />;
 }
@@ -26,14 +29,11 @@ export function ProjectCard({ project, onOpen }: { project: Project; onOpen: () 
   const tilt = useTilt(project.destaque ? 4 : 7);
   const shown = project.stack.slice(0, 6);
   return (
-    <button
-      type="button"
+    <article
       onMouseMove={tilt.onMouseMove}
       onMouseLeave={tilt.onMouseLeave}
       onMouseEnter={() => play('blip')}
-      onClick={onOpen}
-      aria-label={`Abrir briefing da missão ${project.nome}`}
-      className="card group flex h-full w-full cursor-pointer flex-col text-left transition-transform duration-200 [transform-style:preserve-3d]"
+      className="card group relative flex h-full w-full flex-col text-left transition-transform duration-200 [transform-style:preserve-3d]"
     >
       <div className={`relative w-full overflow-hidden border-b border-blood/40 ${project.destaque ? 'h-[230px]' : 'h-[150px]'}`}>
         <ProjectVisual project={project} />
@@ -51,7 +51,16 @@ export function ProjectCard({ project, onOpen }: { project: Project; onOpen: () 
           {shown.map((s) => <li key={s} className="chip">{s}</li>)}
           {project.stack.length > shown.length && <li className="chip">+{project.stack.length - shown.length}</li>}
         </ul>
+        {/* O ::after estica o botão sobre o card inteiro: clicar em qualquer ponto também abre os detalhes. */}
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={`Ver detalhes técnicos de ${project.nome}`}
+          className="mt-2 flex w-fit cursor-pointer items-center gap-2 border border-sith px-4 py-2.5 font-mono text-xs uppercase tracking-[.16em] text-bone transition-shadow after:absolute after:inset-0 group-hover:bg-sith/15 group-hover:shadow-[0_0_16px_rgba(225,6,0,.5)]"
+        >
+          Ver detalhes técnicos <span aria-hidden="true">→</span>
+        </button>
       </div>
-    </button>
+    </article>
   );
 }
