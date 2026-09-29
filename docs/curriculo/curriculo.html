@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo Martins França · Desenvolvedor Full Stack</title>
+  <!--
+    Fonte do currículo do portfólio. Para regerar o PDF: abra este arquivo no Chrome, Ctrl+P,
+    "Salvar como PDF", papel A4, margens "Nenhuma", ative "Gráficos de plano de fundo".
+    Salve como public/Curriculo-Gustavo-Martins-Franca.pdf.
+  -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Georgia', serif; font-size: 9.2pt; color: #1a1a1a; background: #fff; padding: 22px 38px; max-width: 800px; margin: 0 auto; line-height: 1.3; }
+    header { margin-bottom: 8px; }
+    h1 { font-size: 19pt; font-weight: 700; letter-spacing: -0.3px; color: #0d1b2a; }
+    .subtitle { font-size: 10.2pt; color: #b3120c; font-weight: 600; margin: 2px 0 4px; }
+    .contact { font-size: 8.6pt; color: #4b5563; font-family: 'Arial', sans-serif; }
+    .contact a { color: #b3120c; text-decoration: none; }
+    section { margin-top: 8px; }
+    h2 { font-size: 8.2pt; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #0d1b2a; border-bottom: 1.5px solid #0d1b2a; padding-bottom: 2px; margin-bottom: 5px; font-family: 'Arial', sans-serif; }
+    .resumo p { font-size: 9.1pt; color: #374151; text-align: justify; }
+    .entry { margin-bottom: 6px; }
+    .entry-header { display: flex; justify-content: space-between; align-items: baseline; }
+    .entry-title { font-weight: 700; font-size: 9.3pt; color: #0d1b2a; }
+    .entry-company { font-size: 9.3pt; color: #374151; }
+    .entry-meta { font-size: 8pt; color: #6b7280; font-family: 'Arial', sans-serif; text-align: right; white-space: nowrap; margin-left: 12px; }
+    .entry-stack { font-size: 8pt; color: #6b7280; font-style: italic; font-family: 'Arial', sans-serif; margin-top: 1px; }
+    ul.bullets { margin-top: 2px; padding-left: 16px; list-style: none; }
+    ul.bullets li { position: relative; padding-left: 10px; color: #374151; font-size: 8.7pt; margin-bottom: 1px; line-height: 1.27; }
+    ul.bullets li::before { content: '–'; position: absolute; left: 0; color: #6b7280; }
+    .skills-grid { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 8.7pt; }
+    .skill-label { font-weight: 700; color: #0d1b2a; font-family: 'Arial', sans-serif; white-space: nowrap; }
+    .skill-value { color: #374151; }
+    @media print { body { padding: 18px 32px; } @page { margin: 0; size: A4; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Gustavo Martins França</h1>
+    <div class="subtitle">Desenvolvedor Full Stack · TypeScript · Java · PostgreSQL · IA Generativa</div>
+    <div class="contact">
+      (18) 99757-7550 &nbsp;·&nbsp; gustavo_mf1@hotmail.com &nbsp;·&nbsp; Pirapozinho, SP — disponível para trabalho remoto e presencial<br>
+      <a href="https://www.linkedin.com/in/gustavo-martins-fran%C3%A7a">linkedin.com/in/gustavo-martins-frança</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/gustavomf1">github.com/gustavomf1</a>
+    </div>
+  </header>
+
+  <section class="resumo">
+    <h2>Resumo</h2>
+    <p>
+      Desenvolvedor Full Stack que constrói SaaS de ponta a ponta, do modelo de dados ao app mobile, com
+      <strong>TypeScript</strong> (React, Next.js, NestJS), <strong>Java/Spring Boot</strong> e
+      <strong>PostgreSQL</strong>, e experiência real com <strong>IA Generativa em produção</strong>. No SafeCore
+      (SaaS B2B com proposta enterprise em andamento) integrei a API da Claude para extrair trechos de normas
+      regulatórias, com prompt iterativo, ajuste de tokens, sanitização de resposta e trade-off custo × qualidade.
+      No FinTrack AI uso saída estruturada com validação (Zod) em duas integrações com LLM. Testo o que construo
+      (Jest, JUnit, Mockito, TestContainers) e trabalho em times ágeis.
+    </p>
+  </section>
+
+  <section>
+    <h2>Experiência</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Auxiliar de TI</span><span class="entry-company"> &nbsp;·&nbsp; Unimed Presidente Prudente</span></div>
+        <div class="entry-meta">Out 2025 – Jan 2026 · Presidente Prudente, SP</div>
+      </div>
+      <ul class="bullets">
+        <li>Fluxos ETL com Pentaho e Apache Hop, pipelines com Apache Airflow e suporte a projetos de BI e Analytics</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Desenvolvedor Back End</span><span class="entry-company"> &nbsp;·&nbsp; Liax Tech</span></div>
+        <div class="entry-meta">Mar 2025 – Jun 2025 · remoto</div>
+      </div>
+      <ul class="bullets">
+        <li>Java e <strong>Spring Boot</strong> em sistemas legados; autenticação JWT e controle de acesso por perfil; APIs RESTful</li>
+        <li>Testes unitários e de integração com <strong>JUnit e Mockito</strong>; Oracle com PL/SQL; Git em equipe</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Estagiário de Desenvolvimento</span><span class="entry-company"> &nbsp;·&nbsp; Liax Tech</span></div>
+        <div class="entry-meta">Out 2024 – Mar 2025 · remoto</div>
+      </div>
+      <ul class="bullets">
+        <li>Manutenção em Java, Spring Boot e Oracle; correção de bugs e melhorias; Git e metodologia ágil</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projetos</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">SafeCore</span><span class="entry-company"> &nbsp;·&nbsp; SaaS B2B de gestão de segurança em engenharia (NR-01, ISO 45001)</span></div>
+        <div class="entry-meta">Projeto próprio · 2025–2026</div>
+      </div>
+      <div class="entry-stack">Spring Boot · PostgreSQL · Flyway · React/TypeScript · Flutter · AWS S3 · Claude API</div>
+      <ul class="bullets">
+        <li>Proposta comercial enterprise em andamento com cliente real (operadora aeroportuária): licenciamento SaaS e serviço de responsabilidade técnica</li>
+        <li>Não Conformidade com state machine de 6 estados, auditoria imutável com snapshots point-in-time, arquitetura multi-tenant com RBAC e notificações assíncronas (<code>@Async</code> + <code>@TransactionalEventListener</code>)</li>
+        <li><strong>IA Generativa:</strong> busca e extração de trechos em normas com Claude Haiku 4.5, prompt iterado para cobrir todos os trechos pertinentes, <code>max_tokens</code> de 1024 para 4096, sanitização da resposta para JSON e timeouts alinhados (nginx + axios) para respostas de 30–40 s; extração de resumos de PDFs guiada por prompt livre do usuário</li>
+        <li>Frontend em React/TypeScript (TanStack Query, Zod, Tailwind) e app Flutter com upload de evidências (câmera + geolocalização) para AWS S3</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">FinTrack AI</span><span class="entry-company"> &nbsp;·&nbsp; SaaS de finanças pessoais com IA</span></div>
+        <div class="entry-meta">Projeto próprio · online</div>
+      </div>
+      <div class="entry-stack">NestJS · Zod · PostgreSQL · Drizzle ORM · Next.js (App Router) · TanStack Query · Jest · Gemini API</div>
+      <ul class="bullets">
+        <li>Duas integrações reais com LLM usando <strong>structured output</strong>: insights de gastos com severidade e recomendação, e classificação automática de transações em categorias com enum restrito e etapa de confirmação do usuário</li>
+        <li>API NestJS com <code>ZodValidationPipe</code> customizado, autenticação JWT própria (guard, cookie httpOnly, rotas escopadas por usuário), migrations manuais e testes unitários com Jest</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">ERP de Leilões em Tempo Real</span></div>
+        <div class="entry-meta">Projeto próprio</div>
+      </div>
+      <div class="entry-stack">Spring Boot · Angular · RxJS · RabbitMQ · Redis · WebSocket/STOMP · PostgreSQL · Docker</div>
+      <ul class="bullets">
+        <li>Lances em tempo real via WebSocket/STOMP e RabbitMQ, cache distribuído com Redis e regras financeiras (PIX, faturas, taxas, comissões, fechamento) com <code>@Transactional</code></li>
+        <li>Painel administrativo em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB; testes de integração com TestContainers e Docker Compose</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Outros projetos</span></div>
+        <div class="entry-meta">github.com/gustavomf1</div>
+      </div>
+      <ul class="bullets">
+        <li><strong>Insight Flow</strong> (em equipe): análise de ativos financeiros com FastAPI em camadas, migrations Alembic, IA multi-provedor (Claude, OpenAI, Ollama) e validador determinístico da saída</li>
+        <li><strong>Microsserviços Event-Driven:</strong> 4 serviços Quarkus com Kafka, OpenTelemetry e propagação de token OIDC no gateway BFF</li>
+        <li><strong>LogTrack:</strong> rastreamento de lotes via RFID, com Quarkus/Java 21, Angular e firmware ESP32 (IoT)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Habilidades</h2>
+    <div class="skills-grid">
+      <span class="skill-label">IA Generativa</span>
+      <span class="skill-value">Claude API (Anthropic), Gemini e OpenAI APIs, prompt engineering, structured output (JSON schema), tuning de tokens e trade-off custo × qualidade, guardrails de saída</span>
+      <span class="skill-label">Linguagens</span>
+      <span class="skill-value">TypeScript, Java, JavaScript, Python, SQL, PL/SQL, Dart</span>
+      <span class="skill-label">Frontend</span>
+      <span class="skill-value">React, Next.js, TanStack Query, Zod, Tailwind, Angular, RxJS, Flutter, HTML5, CSS3</span>
+      <span class="skill-label">Backend</span>
+      <span class="skill-value">Spring Boot, Spring Security, JPA/Hibernate, NestJS, Quarkus, FastAPI, APIs REST, JWT, OIDC/Auth0</span>
+      <span class="skill-label">Banco de dados</span>
+      <span class="skill-value">PostgreSQL, Oracle, MySQL, Redis, Drizzle ORM, Flyway; modelagem relacional e migrations versionadas</span>
+      <span class="skill-label">Mensageria</span>
+      <span class="skill-value">Apache Kafka, RabbitMQ, WebSocket/STOMP, OpenTelemetry</span>
+      <span class="skill-label">Testes / DevOps</span>
+      <span class="skill-value">Jest, JUnit, Mockito, TestContainers, Git, Docker, Docker Compose, CI/CD, AWS S3, Linux</span>
+      <span class="skill-label">Práticas</span>
+      <span class="skill-value">Clean Code, SOLID, arquitetura multi-tenant, microsserviços e event-driven, metodologias ágeis</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Formação</h2>
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Sistemas de Informação</span><span class="entry-company"> &nbsp;·&nbsp; Toledo Prudente Centro Universitário</span></div>
+        <div class="entry-meta">4º ano — conclusão prevista em 2026 · Presidente Prudente, SP</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

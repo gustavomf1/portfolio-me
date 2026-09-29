@@ -89,6 +89,7 @@ export function Comunicacao() {
               href={c.url}
               target={c.url.startsWith('http') ? '_blank' : undefined}
               rel="noopener noreferrer"
+              download={c.k === 'CURRÍCULO' ? true : undefined}
               onMouseEnter={() => play('blip')}
               className="grid items-center gap-3 border-b border-blood/25 py-4 text-bone transition-all hover:bg-blood/10 hover:pl-3.5"
               style={{ gridTemplateColumns: '110px 1fr auto' }}

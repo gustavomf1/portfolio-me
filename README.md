@@ -20,7 +20,7 @@ Tudo em `src/data/*.ts` (perfil, projetos, skills, experiência, pipeline de IA)
 
 | O quê | Onde |
 | --- | --- |
-| Currículo (PDF) | substitua `public/curriculo.pdf` |
+| Currículo (PDF) | edite `docs/curriculo/curriculo.html` e gere de novo o PDF em `public/Curriculo-Gustavo-Martins-Franca.pdf` (instruções no comentário do HTML) |
 | Formulário via Formspree (opcional) | `src/data/profile.ts` (`formspree`); vazio usa `mailto:` |
 | URL final do site (Open Graph) | variável `NEXT_PUBLIC_SITE_URL` |
 | Prints dos projetos | coloque em `public/assets/projects/` e preencha `imagem` em `src/data/projects.ts` (o campo `slot` sugere o nome do arquivo). Sem `imagem`, o card mostra um mockup SVG |
