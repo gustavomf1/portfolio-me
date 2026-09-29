@@ -4,6 +4,7 @@ import { Vignette } from '@/components/fx/Vignette';
 import { Crawl } from '@/components/fx/Crawl';
 import { Hero } from '@/components/sections/Hero';
 import { Identificacao } from '@/components/sections/Identificacao';
+import { Missoes } from '@/components/sections/Missoes';
 import { Arsenal } from '@/components/sections/Arsenal';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <Identificacao />
         <Arsenal />
+        <Missoes />
       </main>
     </>
   );
