@@ -28,6 +28,8 @@ export function runCommand(input: string): TerminalResult {
       return { lines: ['Acesso concedido. O Império aprova esta contratação.', 'Abrindo canal de comunicação...'], action: 'open-contact' };
     case 'clear': return { lines: [], action: 'clear' };
     case 'exit': return { lines: ['Transmissão encerrada.'], action: 'close' };
-    default: return { lines: [`Comando não reconhecido: "${cmd}". Digite help.`] };
+    default:
+      if (cmd.startsWith('sudo')) return { lines: ['Permissão negada. Você ainda não é um Lorde Sith.'] };
+      return { lines: [`Comando não reconhecido: "${cmd}". Digite help.`] };
   }
 }

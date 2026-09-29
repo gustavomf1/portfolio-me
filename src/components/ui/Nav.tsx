@@ -49,6 +49,14 @@ export function Nav() {
       <Logo />
       <button
         type="button"
+        onClick={() => { play('door'); window.dispatchEvent(new Event('sith:open-terminal')); }}
+        aria-label="Abrir terminal"
+        className="ml-auto hidden h-[38px] items-center border border-blood/60 px-3 font-mono text-xs tracking-[.1em] text-bone hover:border-ember md:flex"
+      >
+        &gt;_ TERMINAL
+      </button>
+      <button
+        type="button"
         className="md:hidden grid h-10 w-10 place-items-center"
         aria-label="Menu"
         aria-expanded={open}

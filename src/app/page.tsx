@@ -9,6 +9,10 @@ import { Campanhas } from '@/components/sections/Campanhas';
 import { DestaqueIA } from '@/components/sections/DestaqueIA';
 import { Comunicacao } from '@/components/sections/Comunicacao';
 import { Footer } from '@/components/sections/Footer';
+import { Cursor } from '@/components/fx/Cursor';
+import { EasterEggs } from '@/components/ui/EasterEggs';
+import { Holocron } from '@/components/ui/Holocron';
+import { Toast } from '@/components/ui/Toast';
 import { Arsenal } from '@/components/sections/Arsenal';
 
 export default function Home() {
@@ -19,6 +23,10 @@ export default function Home() {
       <Vignette />
       <Nav />
       <MuteButton />
+      <Holocron />
+      <Cursor />
+      <EasterEggs />
+      <Toast />
       <main id="conteudo" className="relative z-[1]">
         <Hero />
         <Identificacao />

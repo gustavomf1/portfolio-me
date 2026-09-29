@@ -22,3 +22,9 @@ test('clear e exit', () => {
   expect(runCommand('clear').action).toBe('clear');
   expect(runCommand('exit').action).toBe('close');
 });
+
+test('sudo com outro comando é negado com humor', () => {
+  const r = runCommand('sudo rm -rf /');
+  expect(r.lines.join(' ')).toMatch(/Permissão negada/);
+  expect(r.action).toBeUndefined();
+});

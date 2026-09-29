@@ -71,3 +71,6 @@ a:hover { color: var(--color-bone); }
 @keyframes blink { 50% { opacity: 0; } }
 
 @keyframes pipelinePulse { 0%, 100% { transform: scaleX(0); opacity: 0; } 20%, 40% { transform: scaleX(1); opacity: 1; } 60% { transform: scaleX(1); opacity: 0; } }
+
+/* Konami: o site "cai" para o lado luz por 3 s (o vermelho vira azul-ciano). */
+html.light-side body { filter: hue-rotate(180deg) brightness(1.15); transition: filter .6s; }
