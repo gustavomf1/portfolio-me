@@ -52,7 +52,7 @@ export function Nav() {
           type="button"
           onClick={() => { play('door'); window.dispatchEvent(new Event('sith:open-terminal')); }}
           aria-label="Abrir terminal"
-          className="hidden h-[38px] cursor-pointer items-center border border-blood/60 px-3 font-mono text-xs tracking-[.1em] text-bone hover:border-ember md:flex"
+          className="hidden h-[38px] cursor-pointer items-center border border-blood/60 px-3 font-mono text-xs tracking-[.1em] text-bone hover:border-ember xl:flex"
         >
           &gt;_ TERMINAL
         </button>
@@ -60,7 +60,7 @@ export function Nav() {
       </div>
       <button
         type="button"
-        className="md:hidden grid h-10 w-10 place-items-center"
+        className="xl:hidden grid h-10 w-10 place-items-center"
         aria-label="Menu"
         aria-expanded={open}
         aria-controls="menu-lista"
@@ -70,7 +70,7 @@ export function Nav() {
       </button>
       <ul
         id="menu-lista"
-        className={`${open ? 'fixed inset-x-0 top-[68px] flex flex-col bg-void/95 p-6 gap-5 border-b border-blood/40' : 'hidden'} md:static md:flex md:flex-row md:items-center md:gap-7 md:p-0 md:bg-transparent md:border-0`}
+        className={`${open ? 'fixed inset-x-0 top-[68px] flex max-h-[calc(100dvh-68px)] flex-col gap-1 overflow-y-auto border-b border-blood/40 bg-void/98 p-4 backdrop-blur-md' : 'hidden'} xl:static xl:flex xl:flex-row xl:items-center xl:gap-7 xl:p-0 xl:bg-transparent xl:border-0`}
       >
         {SECTIONS.map((s) => (
           <li key={s.id}>
@@ -80,16 +80,25 @@ export function Nav() {
               onClick={go}
               onMouseEnter={() => play('blip')}
               aria-current={active === s.id ? 'true' : undefined}
-              className={`font-mono text-[13px] uppercase tracking-[.14em] ${active === s.id ? 'text-bone' : 'text-ash'} hover:text-bone`}
+              className={`block py-3 font-mono text-[13px] uppercase tracking-[.14em] xl:py-0 ${active === s.id ? 'text-bone' : 'text-ash'} hover:text-bone`}
             >
               {s.label}
             </a>
           </li>
         ))}
+        <li className="xl:hidden">
+          <button
+            type="button"
+            onClick={() => { play('door'); setOpen(false); window.dispatchEvent(new Event('sith:open-terminal')); }}
+            className="block w-full cursor-pointer py-3 text-left font-mono text-[13px] uppercase tracking-[.14em] text-ash hover:text-bone"
+          >
+            &gt;_ Terminal
+          </button>
+        </li>
       </ul>
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 hidden h-[3px] md:block"
+        className="pointer-events-none absolute bottom-0 hidden h-[3px] xl:block"
         style={{
           left: blade.left,
           width: blade.width,

@@ -62,7 +62,7 @@ export function Crawl() {
           </div>
           <p className="m-0">Tempos de sistemas instáveis. Prazos apertados e código legado ameaçam a galáxia do software.</p>
           <p className="m-0">Em Pirapozinho, SP, um engenheiro full stack constrói SaaS de ponta a ponta com Java, TypeScript e PostgreSQL, e coloca inteligência artificial para trabalhar em produção.</p>
-          <p className="m-0">No último ano de Sistemas de Informação, GUSTAVO MARTINS FRANÇA segue em missão: construir sistemas que resistem à escuridão…</p>
+          <p className="m-0">No último ano de Sistemas de Informação, GUSTAVO MARTINS FRANÇA segue em missão: abraçar a escuridão para construir sistemas que vencem…</p>
         </div>
       </div>
       <div className="absolute right-[clamp(16px,3vw,32px)] top-[clamp(16px,3vw,28px)] z-10 flex items-center gap-3">

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Gustavo Martins França · Engenheiro de Software Full Stack',
-    description: 'Construo sistemas que resistem à escuridão.',
+    description: 'Abraço a escuridão para construir sistemas que vencem.',
     locale: 'pt_BR',
     type: 'website',
   },

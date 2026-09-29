@@ -4,7 +4,7 @@ export const profile = {
   nome: 'Gustavo Martins França',
   cargo: 'Engenheiro de Software Full Stack',
   subtitulo: 'TypeScript · Java · PostgreSQL · IA Generativa',
-  frase: 'Construo sistemas que resistem à escuridão.',
+  frase: 'Abraço a escuridão para construir sistemas que vencem.',
   fraseFinal: 'Que a Força (e os testes) estejam com você.',
   local: 'Pirapozinho, SP · disponível para remoto e presencial',
   email: 'gustavo_mf1@hotmail.com', // exibido como texto simples (sem link)
