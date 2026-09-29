@@ -58,3 +58,14 @@ a:hover { color: var(--color-bone); }
 .chip { font-family: var(--font-mono); font-size: 12px; color: var(--color-ash); border: 1px solid rgba(139,0,0,.5); padding: 3px 9px; }
 .sr-only-focusable { position: absolute; left: -9999px; top: 8px; z-index: 500; background: var(--color-sith); color: var(--color-bone); padding: 10px 16px; }
 .sr-only-focusable:focus { left: 8px; }
+
+@keyframes crawl { from { transform: rotateX(26deg) translate(-50%, 110vh); } to { transform: rotateX(26deg) translate(-50%, -170%); } }
+@keyframes introPre { 0% { opacity: 0; } 15% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes dsRise { from { opacity: 0; transform: translateY(-38%) scale(.94); } to { opacity: .92; transform: translateY(-50%) scale(1); } }
+@keyframes scrollDot { 0% { top: 0; opacity: 0; } 25% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+@keyframes flow { from { left: 0; } to { left: 100%; } }
+@keyframes pulseGlow { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes holoSpin { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes blink { 50% { opacity: 0; } }
