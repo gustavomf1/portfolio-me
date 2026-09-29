@@ -115,3 +115,30 @@ test('começa desmutado: um "mudo" antigo salvo no localStorage é ignorado', ()
   const eng = createAudioEngine({ createMedia: () => playableMedia(), createContext: () => null });
   expect(eng.isMuted()).toBe(false);
 });
+
+function fakeSfx(rejects = false) {
+  return { volume: 0, src: '', play: vi.fn((): Promise<void> => (rejects ? Promise.reject(new Error('x')) : Promise.resolve())) } as unknown as HTMLAudioElement;
+}
+
+test('ignition toca o arquivo de som quando disponível', () => {
+  const sfx = fakeSfx();
+  const createSfx = vi.fn(() => sfx);
+  const eng = createAudioEngine({ createMedia: () => playableMedia(), createContext: () => null, createSfx });
+  eng.play('ignition');
+  expect(createSfx).toHaveBeenCalledWith(expect.stringContaining('ignition.mp3'));
+  expect(sfx.play).toHaveBeenCalledTimes(1);
+});
+
+test('ignition mudo não toca nada', () => {
+  sessionStorage.setItem('sith:muted', '1');
+  const createSfx = vi.fn(() => fakeSfx());
+  const eng = createAudioEngine({ createMedia: () => playableMedia(), createContext: () => null, createSfx });
+  eng.play('ignition');
+  expect(createSfx).not.toHaveBeenCalled();
+});
+
+test('se o arquivo de ignição falhar, cai no som sintetizado sem erro', async () => {
+  const eng = createAudioEngine({ createMedia: () => playableMedia(), createContext: () => null, createSfx: () => fakeSfx(true) });
+  expect(() => eng.play('ignition')).not.toThrow();
+  await Promise.resolve(); await Promise.resolve();
+});

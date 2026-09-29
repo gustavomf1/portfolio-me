@@ -26,8 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" suppressHydrationWarning className={`${orbitron.variable} ${manrope.variable} ${jetbrains.variable}`}>
       <head>
         {/* Esconde o crawl antes da hidratação em quem já o viu (evita o flash do site antes da intro). */}
-        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('sith:crawl-seen')==='1')document.documentElement.classList.add('crawl-seen')}catch(e){}" }} />
-        <noscript><style>{'[data-crawl]{display:none!important}'}</style></noscript>
+        <script dangerouslySetInnerHTML={{ __html: "try{var s=sessionStorage;if(s.getItem('sith:crawl-seen')==='1')document.documentElement.classList.add('crawl-seen');if(s.getItem('sith:gate-seen')==='1')document.documentElement.classList.add('gate-seen')}catch(e){}" }} />
+        <noscript><style>{'[data-crawl],[data-gate]{display:none!important}'}</style></noscript>
       </head>
       <body className="grain scanlines">{children}</body>
     </html>

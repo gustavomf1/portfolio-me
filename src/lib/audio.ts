@@ -3,12 +3,18 @@ import { sessionGet, sessionSet } from './storage';
 
 export const MUSIC_VOLUME = 0.08; // volume de fundo, ajuste aqui
 export const MUSIC_SRC = asset('/assets/sounds/emperor-theme.mp3'); // TROCAR aqui pela faixa desejada
+const IGNITION_SRC = asset('/assets/sounds/ignition.mp3'); // som de ignição do sabre (troque o arquivo para mudar)
 const FADE_MS = 3000;
 const MUTE_KEY = 'sith:muted';
 
 export type SoundName = 'ignition' | 'hum' | 'swing' | 'blip' | 'door' | 'march';
 
-type Deps = { createMedia: () => HTMLAudioElement | null; createContext: () => AudioContext | null };
+type Deps = {
+  createMedia: () => HTMLAudioElement | null;
+  createContext: () => AudioContext | null;
+  // Efeito sonoro por arquivo (ex.: ignição do sabre). Opcional: sem ele, usa o som sintetizado.
+  createSfx?: (src: string) => HTMLAudioElement | null;
+};
 
 export function createAudioEngine(deps: Deps) {
   let media: HTMLAudioElement | null = null;
@@ -60,11 +66,26 @@ export function createAudioEngine(deps: Deps) {
     o.stop(t + dur + 0.05);
   }
 
+  function synthIgnition() {
+    tone(90, 0.9, 'sawtooth', 0.18, 0, 420);
+    tone(180, 0.9, 'square', 0.06, 0, 840);
+  }
+
   function play(name: SoundName) {
-    if (!ctx || muted) return;
+    if (muted) return;
+    // Ignição: arquivo real (/assets/sounds/ignition.mp3); se falhar ou não existir, cai no sintetizado.
+    if (name === 'ignition' && deps.createSfx) {
+      const sfx = deps.createSfx(IGNITION_SRC);
+      if (sfx) {
+        sfx.volume = 0.75;
+        sfx.play()?.then(undefined, synthIgnition);
+        return;
+      }
+    }
+    if (!ctx) return;
     // Para usar arquivos reais, toque aqui um <audio src="/assets/sounds/<nome>.mp3"> antes do fallback.
     switch (name) {
-      case 'ignition': tone(90, 0.9, 'sawtooth', 0.18, 0, 420); tone(180, 0.9, 'square', 0.06, 0, 840); break;
+      case 'ignition': synthIgnition(); break;
       case 'swing': tone(520, 0.22, 'sawtooth', 0.1, 0, 140); break;
       case 'blip': tone(880, 0.06, 'square', 0.04); break;
       case 'door': tone(140, 0.5, 'triangle', 0.12, 0, 60); tone(700, 0.3, 'sine', 0.05, 0.1, 300); break;
@@ -140,6 +161,7 @@ export function createAudioEngine(deps: Deps) {
 
 export const audio = createAudioEngine({
   createMedia: () => (typeof Audio === 'undefined' ? null : new Audio()),
+  createSfx: (src) => (typeof Audio === 'undefined' ? null : new Audio(src)),
   createContext: () => {
     if (typeof window === 'undefined') return null;
     const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;

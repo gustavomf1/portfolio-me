@@ -1,6 +1,7 @@
 import { Nav } from '@/components/ui/Nav';
 import { Vignette } from '@/components/fx/Vignette';
 import { Crawl } from '@/components/fx/Crawl';
+import { Gate } from '@/components/fx/Gate';
 import { Hero } from '@/components/sections/Hero';
 import { Identificacao } from '@/components/sections/Identificacao';
 import { Missoes } from '@/components/sections/Missoes';
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <>
       <a href="#conteudo" className="sr-only-focusable">Pular para o conteúdo</a>
+      <Gate />
       <Crawl />
       <Vignette />
       <Nav />

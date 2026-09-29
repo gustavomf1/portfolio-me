@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useSyncExternalStore } from 'react';
 import { audio } from '@/lib/audio';
+import { gate } from '@/lib/gate';
 import { MuteButton } from '@/components/ui/MuteButton';
 import { sessionGet, sessionSet } from '@/lib/storage';
 import { useAudio } from '@/lib/useAudio';
@@ -17,20 +18,22 @@ export function Crawl() {
   // Servidor renderiza o crawl; o script do <head> o esconde por CSS para quem já viu (html.crawl-seen).
   const seen = useSyncExternalStore(subscribe, getSeen, () => false);
   const reduced = useReducedMotion();
+  // A intro só monta quando a tela de entrada começa a abrir (para não perder o início da animação).
+  const gateOpen = useSyncExternalStore(gate.subscribe, gate.isOpening, () => false);
   const { unlock, playing, muted } = useAudio();
 
   // Música de fundo durante a intro. O navegador só libera áudio após um gesto: tentamos iniciar direto
   // (funciona se o navegador permitir) e, se for bloqueado, o primeiro clique, toque ou tecla inicia.
   useEffect(() => {
-    if (seen) return;
+    if (seen || !gateOpen) return;
     if (!reduced) audio.tryStart();
     const start = () => audio.unlock();
     const events = ['pointerdown', 'pointerup', 'keydown', 'touchend'] as const;
     events.forEach((e) => window.addEventListener(e, start, { once: true, passive: true }));
     return () => events.forEach((e) => window.removeEventListener(e, start));
-  }, [seen, reduced]);
+  }, [seen, gateOpen, reduced]);
 
-  if (seen) return null;
+  if (seen || !gateOpen) return null;
 
   const finish = () => { sessionSet(KEY, '1'); window.dispatchEvent(new Event(EVT)); };
   const skip = () => { unlock(); finish(); };
