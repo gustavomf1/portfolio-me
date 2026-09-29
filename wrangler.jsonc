@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Deve ser igual ao "Project name" do Cloudflare.
+  "name": "portfolio-me",
+  "compatibility_date": "2026-09-29",
+  // Site estático: publica a pasta gerada por `npm run build` (output: 'export').
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}

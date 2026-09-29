@@ -34,18 +34,20 @@ Tudo em `src/data/*.ts` (perfil, projetos, skills, experiência, pipeline de IA)
 
 Código Konami, 5 cliques no logo, digitar `sith` (abre o terminal) e o console do navegador.
 
-## Deploy no Cloudflare Pages (gustavofranca.dev)
+## Deploy no Cloudflare (gustavofranca.dev)
 
-1. Suba o repositório para o GitHub.
-2. Cloudflare → *Workers & Pages* → *Create* → *Pages* → *Connect to Git* e escolha o repositório.
-3. Configuração do build:
-   - **Framework preset:** Next.js (Static HTML Export)
+O projeto usa o fluxo *Workers & Pages* do Cloudflare com assets estáticos (`wrangler.jsonc` publica a pasta `out/`).
+
+1. Suba o repositório para o GitHub (o `wrangler.jsonc` precisa estar nele).
+2. Cloudflare → *Workers & Pages* → *Create* → conecte o repositório.
+3. Configuração:
+   - **Project name:** `portfolio-me` (igual ao `name` do `wrangler.jsonc`)
    - **Build command:** `npm run build`
-   - **Build output directory:** `out`
-   - **Variáveis de ambiente:** `NODE_VERSION=22` (o `.nvmrc` também fixa isso) e `NEXT_PUBLIC_SITE_URL=https://gustavofranca.dev`
-4. Depois do primeiro deploy: *Custom domains* → *Set up a custom domain* → `gustavofranca.dev`. Se o domínio estiver no Cloudflare, o DNS é criado sozinho; se não, aponte os nameservers para o Cloudflare (ou crie um CNAME para o endereço `*.pages.dev`).
-5. Adicione também `www.gustavofranca.dev` e crie um redirecionamento (*Bulk Redirects* ou uma regra de página) de `www` para o domínio principal.
-6. `.dev` exige HTTPS; o Cloudflare emite o certificado automaticamente.
+   - **Deploy command:** `npx wrangler deploy`
+   - **Branch de produção:** a mesma do repositório (aqui é `master`)
+   - *Advanced settings → Build variables:* `NEXT_PUBLIC_SITE_URL=https://gustavofranca.dev` (o `.nvmrc` já fixa o Node 22)
+4. Depois do primeiro deploy: *Settings → Domains & Routes → Add → Custom domain* → `gustavofranca.dev` (e `www`, com redirecionamento para o principal). Se o domínio estiver no Cloudflare, o DNS é criado sozinho; senão, aponte os nameservers para o Cloudflare. `.dev` exige HTTPS, e o certificado é automático.
+5. Para testar o deploy localmente sem publicar: `npm run build && npx wrangler deploy --dry-run`.
 
 `public/_headers` define o cache dos arquivos e o tipo da imagem de compartilhamento. Ao mudar o domínio, atualize também `public/robots.txt` e `public/sitemap.xml`.
 
