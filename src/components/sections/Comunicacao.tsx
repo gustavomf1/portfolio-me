@@ -57,8 +57,8 @@ export function Comunicacao() {
   };
 
   return (
-    <section id="comunicacao" data-screen-label="06 Comunicação" className="section-pad relative mx-auto max-w-[1240px] !pb-20">
-      <Reveal><SectionTitle label="// 06 COMUNICAÇÃO" title="Abrir canal" /></Reveal>
+    <section id="comunicacao" data-screen-label="05 Comunicação" className="section-pad relative mx-auto max-w-[1240px] !pb-20">
+      <Reveal><SectionTitle label="// 05 COMUNICAÇÃO" title="Abrir canal" /></Reveal>
       <div className="grid items-start gap-[clamp(28px,5vw,64px)]" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,340px),1fr))' }}>
         <Reveal>
           <form onSubmit={enviar} className="relative flex flex-col gap-4 border border-blood/50 bg-coal/55 p-6 backdrop-blur-sm" style={{ boxShadow: 'inset 0 0 40px rgba(139,0,0,.12)' }}>

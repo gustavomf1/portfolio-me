@@ -4,25 +4,15 @@ import { useAudio } from '@/lib/useAudio';
 import { DeathStar3DLayer, useDeathStar } from '@/components/fx/DeathStar';
 import { DeathStarStatic } from '@/components/fx/DeathStarStatic';
 import { Starfield } from '@/components/fx/Starfield';
-import { LightsaberBlade } from '@/components/fx/LightsaberBlade';
 
 export function Hero() {
   const { unlock, play } = useAudio();
   const { use3d, ready, reduced, onReady } = useDeathStar();
 
-  const activate = () => {
-    unlock();
-    play('ignition');
-    play('hum');
-    window.dispatchEvent(new Event('sith:activated'));
-    setTimeout(() => document.getElementById('identificacao')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }), 900);
-  };
-
   return (
     <>
       <Starfield />
       {use3d && <DeathStar3DLayer reduced={reduced} onReady={onReady} />}
-      <LightsaberBlade />
       <section id="inicio" data-screen-label="Hero" className="relative flex min-h-screen items-center overflow-hidden px-[clamp(20px,6vw,80px)] pb-[120px] pt-[120px]">
         <div
           aria-hidden="true"
@@ -51,10 +41,7 @@ export function Hero() {
           </div>
           <p className="m-0 max-w-[520px] border-l-2 border-blood pl-[18px] text-[clamp(17px,1.8vw,20px)] text-[#c9c4bf]">{profile.frase}</p>
           <div className="mt-1.5 flex flex-wrap gap-3.5">
-            <button type="button" onClick={activate} onMouseEnter={() => play('blip')} className="btn btn-primary h-[54px]">
-              Ativar sabre
-            </button>
-            <a href="#missoes" onClick={() => play('swing')} className="btn h-[54px]">
+            <a href="#missoes" onClick={() => { unlock(); play('swing'); }} className="btn btn-primary h-[54px]">
               Ver projetos
             </a>
             <a href={profile.curriculo} download className="flex h-[54px] items-center gap-2.5 px-2.5 font-mono text-[13px] uppercase tracking-[.12em] text-ash hover:text-bone">

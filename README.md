@@ -30,7 +30,7 @@ Tudo em `src/data/*.ts` (perfil, projetos, skills, experiência, pipeline de IA)
 
 - A trilha ambiente é `public/assets/sounds/emperor-theme.mp3`, tocada em loop e em volume baixo (`MUSIC_VOLUME`, em `src/lib/audio.ts`). Só começa após o primeiro clique do visitante; o botão de som (canto inferior esquerdo) liga e desliga, e a escolha fica salva.
 - **Direitos:** é o tema do Imperador (John Williams, Lucasfilm/Disney), numa compilação de fã. Para uso público ou comercial, troque por uma faixa livre de direitos e ajuste `MUSIC_SRC`.
-- Os efeitos (ignição do sabre, swing, blip, marcha) são sintetizados via Web Audio API. Para usar arquivos reais, veja `public/assets/sounds/README.md`.
+- Os efeitos (swing, blip, marcha) são sintetizados via Web Audio API. Para usar arquivos reais, veja `public/assets/sounds/README.md`.
 
 ## Easter eggs
 

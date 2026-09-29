@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { Orbitron, Manrope, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const orbitron = Orbitron({ subsets: ['latin'], weight: ['500', '700', '800', '900'], variable: '--font-orbitron' });
-const manrope = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800'], variable: '--font-manrope' });
-const jetbrains = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-jetbrains' });
+// Fontes variáveis (sem `weight`): uma única consulta por fonte, cobre todos os pesos usados (500 a 900).
+// Com uma lista de pesos fixos, o Turbopack em modo dev falhava com "queries have exactly one entry".
+const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron' });
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
+const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
 
 export const metadata: Metadata = {
   // TROCAR pela URL final do site (usada nas imagens Open Graph).

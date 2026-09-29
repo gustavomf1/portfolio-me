@@ -9,7 +9,6 @@ export const SECTIONS = [
   { id: 'arsenal', label: 'Arsenal' },
   { id: 'missoes', label: 'Missões' },
   { id: 'campanhas', label: 'Campanhas' },
-  { id: 'ia', label: 'IA' },
   { id: 'comunicacao', label: 'Comunicação' },
 ] as const;
 
