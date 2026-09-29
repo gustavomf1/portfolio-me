@@ -23,6 +23,14 @@ test('clear e exit', () => {
   expect(runCommand('exit').action).toBe('close');
 });
 
+test('contact mostra só GitHub e LinkedIn, sem e-mail nem telefone', () => {
+  const txt = runCommand('contact').lines.join('\n');
+  expect(txt).toMatch(/github\.com/);
+  expect(txt).toMatch(/linkedin\.com/);
+  expect(txt).not.toMatch(/@/);
+  expect(txt).not.toMatch(/\d{4,}/);
+});
+
 test('sudo com outro comando é negado com humor', () => {
   const r = runCommand('sudo rm -rf /');
   expect(r.lines.join(' ')).toMatch(/Permissão negada/);

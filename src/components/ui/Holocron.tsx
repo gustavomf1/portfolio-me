@@ -40,7 +40,7 @@ export function Holocron() {
             </div>
             <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">{stack.map((t) => <li key={t} className="chip">{t}</li>)}</ul>
             <div className="flex flex-col gap-1.5 text-[13px]">
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">linkedin.com/in/gustavo-martins-frança</a>
               <a href={profile.github} target="_blank" rel="noopener noreferrer">github.com/gustavomf1</a>
             </div>
             <a href={profile.curriculo} download className="btn btn-primary justify-center">↓ Baixar currículo</a>
