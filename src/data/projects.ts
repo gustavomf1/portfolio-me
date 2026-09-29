@@ -1,166 +1,385 @@
-import type { Project } from './types';
+import type { Project } from "./types";
 
-const gh = (repo: string) => `https://github.com/gustavomf1/${repo}`;
-
+// Conteúdo portado do protótipo (Portfolio.dc.html). Edite aqui; o layout não muda.
+// PRINTS: coloque o arquivo em public/assets/projects/<slot> e preencha `imagem` com o caminho.
 export const projects: Project[] = [
   {
-    slug: 'safecore',
-    nome: 'SafeCore',
-    categorias: ['IA', 'Backend', 'Frontend', 'Mobile', 'Arquitetura'],
-    destaque: true,
-    selo: 'Em produção · proposta enterprise',
-    resumo: 'SaaS B2B de gestão de segurança em engenharia (NR-01, ISO 45001) com IA generativa para normas regulatórias e app mobile de evidências.',
-    stack: ['Spring Boot', 'JPA/Hibernate', 'PostgreSQL', 'Flyway', 'React', 'TypeScript', 'TanStack Query', 'Zod', 'Tailwind', 'Flutter', 'AWS S3', 'Claude API'],
-    links: { repo: [gh('safecore-mobile')], privado: true },
-    briefing: {
-      contexto: 'Plataforma SaaS de segurança em engenharia (ex-EngSeg), com proposta comercial enterprise em andamento com uma operadora aeroportuária: licenciamento SaaS mais serviço de responsabilidade técnica.',
-      desafio: 'Controlar não conformidades com rastreabilidade total, isolar clientes (multi-tenant) e extrair trechos relevantes de normas extensas com IA sem perder cobertura.',
-      construi: 'Fluxo de Não Conformidade com state machine de 6 estados, auditoria imutável com snapshots point-in-time, RBAC multi-tenant, busca e extração em normas e resumos de PDF guiados por prompt livre com Claude Haiku 4.5, e app Flutter com câmera e geolocalização enviando evidências ao AWS S3.',
-      decisoes: [
-        'Notificações com @Async + @TransactionalEventListener para não bloquear a transação.',
-        'Prompt iterado para retornar todos os trechos pertinentes; max_tokens de 1024 para 4096.',
-        'Sanitização da resposta para JSON válido e timeouts alinhados entre nginx e axios (respostas de 30 a 40 s).',
+    "slug": "safecore",
+    "nome": "SafeCore",
+    "categorias": [
+      "IA",
+      "Backend",
+      "Frontend",
+      "Mobile",
+      "Arquitetura"
+    ],
+    "destaque": true,
+    "selo": "Em produção · proposta enterprise",
+    "resumo": "SaaS B2B de gestão de segurança em engenharia (NR-01, ISO 45001), com fluxo de Não Conformidade, auditoria imutável e IA para leitura de normas.",
+    "stack": [
+      "Spring Boot",
+      "JPA/Hibernate",
+      "PostgreSQL",
+      "Flyway",
+      "React",
+      "TypeScript",
+      "TanStack Query",
+      "Zod",
+      "Tailwind",
+      "Flutter",
+      "AWS S3",
+      "Claude API"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "safecore-mobile",
+          "url": "https://github.com/gustavomf1/safecore-mobile"
+        }
       ],
-      resultado: 'Proposta enterprise em negociação com cliente real. Backend e web são privados por acordo comercial.',
+      "privado": true
     },
+    "briefing": {
+      "contexto": "Plataforma SaaS B2B para gestão de segurança em engenharia, aderente à NR-01 e à ISO 45001. Proposta comercial enterprise em andamento com uma operadora aeroportuária, cobrindo licenciamento SaaS e serviço de responsabilidade técnica.",
+      "desafio": "Registrar e tratar não conformidades com rastreabilidade completa para auditoria, isolando dados por cliente, e acelerar a consulta a normas regulatórias extensas.",
+      "construi": [
+        "Fluxo de Não Conformidade com state machine de 6 estados.",
+        "Auditoria imutável e snapshots point-in-time.",
+        "Arquitetura multi-tenant com RBAC.",
+        "Busca e extração de trechos relevantes em normas com Claude Haiku 4.5.",
+        "Extração de resumos de PDFs guiada por prompt livre do usuário.",
+        "App mobile em Flutter com upload de evidências (câmera + geolocalização) para AWS S3."
+      ],
+      "decisoes": [
+        "Notificações assíncronas com @Async + @TransactionalEventListener, disparadas só após o commit.",
+        "Prompt iterado para retornar todos os trechos pertinentes; max_tokens ajustado de 1024 para 4096.",
+        "Sanitização da resposta do modelo para JSON antes de qualquer uso.",
+        "Timeouts alinhados entre nginx e axios para respostas de 30 a 40 s."
+      ],
+      "resultado": "Produto em produção e base de uma proposta enterprise com cliente real do setor aeroportuário."
+    },
+    "slot": "safecore.png"
   },
   {
-    slug: 'fintrack-ai',
-    nome: 'FinTrack AI',
-    categorias: ['IA', 'Backend', 'Frontend'],
-    destaque: true,
-    selo: 'IA com structured output',
-    resumo: 'SaaS de finanças pessoais com duas integrações reais com LLM (Gemini): insights de gastos e classificação automática de transações.',
-    stack: ['NestJS', 'Zod', 'PostgreSQL', 'Drizzle ORM', 'JWT', 'Next.js', 'TanStack Query', 'Jest', 'Gemini API'],
-    links: { repo: [gh('fintrack-ai')] },
-    briefing: {
-      contexto: 'Projeto próprio para praticar arquitetura de um SaaS completo com IA aplicada de verdade, do banco à interface.',
-      desafio: 'Usar LLM de forma confiável: saída estruturada, categorias restritas e o usuário sempre com a palavra final.',
-      construi: 'API NestJS com ZodValidationPipe customizado, autenticação JWT própria (guard CanActivate, cookie httpOnly, rotas escopadas por usuário e controle de ownership), PostgreSQL com Drizzle e migrations manuais, frontend Next.js (App Router, Server Components) e testes unitários com Jest.',
-      decisoes: [
-        'Insights de padrão de gastos com severidade e recomendação acionável via structured output.',
-        'Classificação de descrição em categoria com enum restrito e etapa de confirmar ou sobrescrever.',
-        'Design dark próprio, sem biblioteca de componentes.',
-      ],
-      resultado: 'Duas integrações de LLM funcionando ponta a ponta, com validação do schema antes de qualquer dado chegar à interface.',
+    "slug": "fintrack-ai",
+    "nome": "FinTrack AI",
+    "categorias": [
+      "IA",
+      "Backend",
+      "Frontend"
+    ],
+    "destaque": true,
+    "resumo": "SaaS de finanças pessoais com duas integrações reais com LLM usando structured output: insights de gastos e classificação automática de transações.",
+    "stack": [
+      "NestJS",
+      "Zod",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Next.js",
+      "TanStack Query",
+      "Gemini API",
+      "Jest",
+      "JWT"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "fintrack-ai",
+          "url": "https://github.com/gustavomf1/fintrack-ai"
+        }
+      ]
     },
+    "briefing": {
+      "contexto": "Aplicação de finanças pessoais com design dark próprio, construída para explorar IA aplicada a dados do usuário.",
+      "desafio": "Usar LLM para gerar valor real sem abrir mão de previsibilidade: saídas estruturadas, validadas e com o usuário no controle.",
+      "construi": [
+        "API NestJS com ZodValidationPipe customizado.",
+        "PostgreSQL com Drizzle ORM e migrations manuais.",
+        "Autenticação JWT hand-rolled: guard CanActivate, cookie httpOnly, rotas escopadas por usuário e CRUD com controle de ownership.",
+        "Frontend Next.js (App Router, Server Components) com TanStack Query.",
+        "Insights de padrão de gastos com severidade e recomendação acionável (Gemini + structured output).",
+        "Classificação automática de transação em categoria com enum restrito e etapa de confirmar ou sobrescrever."
+      ],
+      "decisoes": [
+        "Enum restrito no schema de saída para impedir categorias inventadas.",
+        "Confirmação do usuário antes de persistir a classificação.",
+        "Testes unitários com Jest."
+      ],
+      "resultado": "Duas funcionalidades de IA integradas ao fluxo do produto, com saída validada de ponta a ponta."
+    },
+    "slot": "fintrack.png"
   },
   {
-    slug: 'insight-flow',
-    nome: 'Insight Flow',
-    categorias: ['IA', 'Backend', 'Arquitetura'],
-    destaque: true,
-    selo: 'Trabalho em equipe',
-    resumo: 'Plataforma de análise de ativos do mercado financeiro, com camada de IA que abstrai provedores de LLM e valida a saída de forma determinística.',
-    stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'Claude API', 'OpenAI API', 'Ollama', 'JWT', 'bcrypt'],
-    links: { repo: ['https://github.com/InsightF-AI/Insight-flow-backend'] },
-    briefing: {
-      contexto: 'Projeto em equipe (organização InsightF-AI no GitHub) consumido por clientes web, mobile e desktop.',
-      desafio: 'Integrar várias fontes de dados de mercado e usar LLM sem ficar refém de um provedor nem aceitar saída sem validação.',
-      construi: 'Backend em camadas (domain, repositories com interfaces e implementação SQLAlchemy, services, integrations com brapi, Binance e BCB), migrations com Alembic, scheduler, JWT/bcrypt, testes, e camada de IA com provedores intercambiáveis (Claude, OpenAI, Ollama).',
-      decisoes: [
-        'Interfaces nos repositórios para trocar a implementação sem tocar nos services.',
-        'Templates de prompt versionados.',
-        'Validador determinístico de saída da IA (guardrails) antes de responder.',
-      ],
-      resultado: 'API estável servindo três tipos de cliente, com IA trocável por configuração.',
+    "slug": "insight-flow",
+    "nome": "Insight Flow",
+    "categorias": [
+      "IA",
+      "Backend",
+      "Arquitetura"
+    ],
+    "destaque": true,
+    "resumo": "Plataforma de análise de ativos do mercado financeiro, com camada de IA multi-provedor e validador determinístico de saída.",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "Alembic",
+      "Claude",
+      "OpenAI",
+      "Ollama",
+      "JWT"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "Insight-flow-backend",
+          "url": "https://github.com/InsightF-AI/Insight-flow-backend"
+        }
+      ]
     },
+    "briefing": {
+      "contexto": "Projeto em equipe (organização InsightF-AI no GitHub), consumido por clientes web, mobile e desktop.",
+      "desafio": "Integrar fontes de mercado heterogêneas e diferentes provedores de LLM sem acoplar o domínio a nenhum deles.",
+      "construi": [
+        "Backend FastAPI em camadas: domain, repositories (interfaces + SQLAlchemy), services e integrations.",
+        "Integrações com brapi, Binance e BCB.",
+        "Camada de IA com abstração de provedores (Claude, OpenAI, Ollama).",
+        "Templates de prompt versionados e validador determinístico de saída (guardrails).",
+        "Scheduler, JWT/bcrypt e testes."
+      ],
+      "decisoes": [
+        "Repositórios por interface para trocar persistência sem tocar no domínio.",
+        "Prompts versionados como artefato do código.",
+        "Migrations com Alembic."
+      ],
+      "resultado": "Backend único servindo três clientes, com troca de provedor de LLM por configuração."
+    },
+    "slot": "insight-flow.png"
   },
   {
-    slug: 'leilao-erp',
-    nome: 'ERP de Leilões em Tempo Real',
-    categorias: ['Backend', 'Frontend', 'Arquitetura'],
-    destaque: false,
-    resumo: 'Lances em tempo real via WebSocket/STOMP com RabbitMQ e Redis, regras financeiras transacionais e painel admin em Angular.',
-    stack: ['Spring Boot', 'WebSocket/STOMP', 'RabbitMQ', 'Redis', 'Angular', 'RxJS', 'IndexedDB', 'TestContainers', 'Docker Compose'],
-    links: { repo: [gh('leilao-backend'), gh('leilao-frontend')] },
-    briefing: {
-      contexto: 'ERP para leilões, em que vários usuários disputam lances ao mesmo tempo.',
-      desafio: 'Manter os lances consistentes e visíveis em tempo real, com regras financeiras que não podem falhar pela metade.',
-      construi: 'Backend Spring Boot com lances via WebSocket/STOMP e RabbitMQ (AMQP), cache distribuído em Redis, regras financeiras (PIX, faturas, taxas, comissões e fechamento) com @Transactional, painel admin em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB.',
-      decisoes: [
-        'Broker AMQP entre instâncias para distribuir os lances.',
-        'Fechamento do leilão dentro de uma única transação.',
-        'Testes de integração com TestContainers e ambiente reproduzível com Docker Compose.',
-      ],
-      resultado: 'Fluxo completo de leilão com atualização ao vivo e regras financeiras cobertas por testes de integração.',
+    "slug": "erp-de-leiloes",
+    "nome": "ERP de Leilões",
+    "categorias": [
+      "Backend",
+      "Frontend",
+      "Arquitetura"
+    ],
+    "destaque": false,
+    "resumo": "Lances em tempo real via WebSocket/STOMP e RabbitMQ, cache em Redis e regras financeiras transacionais.",
+    "stack": [
+      "Spring Boot",
+      "WebSocket/STOMP",
+      "RabbitMQ",
+      "Redis",
+      "Angular",
+      "RxJS",
+      "TestContainers",
+      "Docker Compose"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "leilao-backend",
+          "url": "https://github.com/gustavomf1/leilao-backend"
+        },
+        {
+          "label": "leilao-frontend",
+          "url": "https://github.com/gustavomf1/leilao-frontend"
+        }
+      ]
     },
+    "briefing": {
+      "contexto": "ERP para operação de leilões com lances ao vivo e gestão financeira.",
+      "desafio": "Manter consistência financeira com muitos lances concorrentes e painéis atualizados em tempo real.",
+      "construi": [
+        "Lances em tempo real com WebSocket/STOMP + RabbitMQ (AMQP).",
+        "Cache distribuído em Redis.",
+        "Regras financeiras: PIX, faturas, taxas, comissões e fechamento de leilão.",
+        "Painel admin em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB."
+      ],
+      "decisoes": [
+        "Operações financeiras com @Transactional.",
+        "Testes de integração com TestContainers.",
+        "Ambiente completo em Docker Compose."
+      ],
+      "resultado": "Fluxo de leilão completo, do lance ao fechamento financeiro."
+    },
+    "slot": "leilao.png"
   },
   {
-    slug: 'quarkus-kafka',
-    nome: 'Microsserviços Event-Driven (Quarkus + Kafka)',
-    categorias: ['Backend', 'Arquitetura'],
-    destaque: false,
-    resumo: 'Quatro microsserviços (cotação, proposta, report e gateway BFF) conversando por eventos no Apache Kafka, com observabilidade distribuída.',
-    stack: ['Quarkus', 'Apache Kafka', 'SmallRye Reactive Messaging', 'OpenTelemetry', 'OIDC'],
-    links: { repo: [gh('quotation-quarkus-kafka'), gh('proposal-quarkus-kafka'), gh('report-quarkus-kafka'), gh('gateway-bff-quarkus-kafka')] },
-    briefing: {
-      contexto: 'Estudo aplicado de arquitetura orientada a eventos com quatro serviços independentes.',
-      desafio: 'Comunicação assíncrona entre serviços sem perder a capacidade de rastrear uma requisição de ponta a ponta.',
-      construi: 'Serviços de cotação, proposta e report que trocam eventos via Kafka com SmallRye Reactive Messaging, e um gateway BFF que propaga o token OIDC. Observabilidade distribuída com OpenTelemetry.',
-      decisoes: [
-        'Eventos em vez de chamadas síncronas entre serviços de domínio.',
-        'BFF como único ponto de entrada, propagando a identidade do usuário.',
-        'Tracing distribuído desde o início.',
-      ],
-      resultado: 'Fluxo de eventos rastreável entre os quatro serviços.',
+    "slug": "microsservicos-event-driven",
+    "nome": "Microsserviços Event-Driven",
+    "categorias": [
+      "Backend",
+      "Arquitetura"
+    ],
+    "destaque": false,
+    "resumo": "4 microsserviços Quarkus comunicando via Apache Kafka, com OpenTelemetry e propagação de token OIDC no gateway BFF.",
+    "stack": [
+      "Quarkus",
+      "Apache Kafka",
+      "SmallRye Reactive Messaging",
+      "OpenTelemetry",
+      "OIDC"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "quotation",
+          "url": "https://github.com/gustavomf1/quotation-quarkus-kafka"
+        },
+        {
+          "label": "proposal",
+          "url": "https://github.com/gustavomf1/proposal-quarkus-kafka"
+        },
+        {
+          "label": "report",
+          "url": "https://github.com/gustavomf1/report-quarkus-kafka"
+        },
+        {
+          "label": "gateway-bff",
+          "url": "https://github.com/gustavomf1/gateway-bff-quarkus-kafka"
+        }
+      ]
     },
+    "briefing": {
+      "contexto": "Sistema de cotação e proposta dividido em serviços independentes: cotação, proposta, report e gateway-BFF.",
+      "desafio": "Desacoplar serviços sem perder rastreabilidade das requisições nem a identidade do usuário entre eles.",
+      "construi": [
+        "Comunicação assíncrona via Kafka com SmallRye Reactive Messaging.",
+        "Gateway BFF com propagação de token OIDC.",
+        "Observabilidade distribuída com OpenTelemetry."
+      ],
+      "decisoes": [
+        "Eventos como contrato entre serviços em vez de chamadas síncronas.",
+        "BFF como único ponto de entrada autenticado."
+      ],
+      "resultado": "Quatro serviços independentes com tracing de ponta a ponta."
+    },
+    "diagrama": true
   },
   {
-    slug: 'logtrack',
-    nome: 'LogTrack',
-    categorias: ['Backend', 'Frontend', 'Arquitetura'],
-    destaque: false,
-    selo: 'Full stack + IoT',
-    resumo: 'Rastreamento de lotes via RFID para logística e almoxarifado, com backend, frontend e firmware ESP32.',
-    stack: ['Quarkus', 'Java 21', 'PostgreSQL', 'Angular', 'Tailwind', 'ESP32', 'PlatformIO', 'Wokwi'],
-    links: { repo: [gh('logtrack')] },
-    briefing: {
-      contexto: 'Monorepo que conecta hardware e software para acompanhar lotes em logística e almoxarifado.',
-      desafio: 'Integrar leitura RFID em firmware embarcado com um backend e uma interface web no mesmo produto.',
-      construi: 'Backend Quarkus com Java 21 e PostgreSQL, frontend Angular + Tailwind e firmware ESP32 (PlatformIO/Arduino) com simulação no Wokwi.',
-      decisoes: [
-        'Monorepo para versionar firmware, API e interface juntos.',
-        'Simulação no Wokwi para validar o firmware sem hardware físico.',
-      ],
-      resultado: 'Cadeia completa do leitor RFID à tela de rastreamento.',
+    "slug": "logtrack",
+    "nome": "LogTrack",
+    "categorias": [
+      "Backend",
+      "Frontend",
+      "Arquitetura"
+    ],
+    "destaque": false,
+    "resumo": "Rastreamento de lotes via RFID para logística e almoxarifado: backend, frontend e firmware ESP32 em um monorepo.",
+    "stack": [
+      "Quarkus",
+      "Java 21",
+      "PostgreSQL",
+      "Angular",
+      "Tailwind",
+      "ESP32",
+      "PlatformIO"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "logtrack",
+          "url": "https://github.com/gustavomf1/logtrack"
+        }
+      ]
     },
+    "briefing": {
+      "contexto": "Projeto full stack com hardware (IoT) para rastrear lotes em logística e almoxarifado.",
+      "desafio": "Ligar leitura física de RFID a um sistema web confiável.",
+      "construi": [
+        "Backend Quarkus com Java 21 e PostgreSQL.",
+        "Frontend Angular + Tailwind.",
+        "Firmware ESP32 (PlatformIO/Arduino) com simulação no Wokwi."
+      ],
+      "decisoes": [
+        "Monorepo reunindo firmware, API e interface.",
+        "Simulação Wokwi para desenvolver o firmware sem depender do hardware."
+      ],
+      "resultado": "Fluxo completo do leitor RFID até a tela."
+    },
+    "slot": "logtrack.png"
   },
   {
-    slug: 'magnossao',
-    nome: 'MAGNOSSÃO',
-    categorias: ['Backend', 'Frontend'],
-    destaque: false,
-    selo: 'Raiz nórdica. Alma brasileira.',
-    resumo: 'E-commerce premium de polos, com backend Spring Boot, loja em Next.js com carrinho e backoffice.',
-    stack: ['Spring Boot', 'PostgreSQL', 'Docker', 'Next.js', 'React', 'TypeScript', 'Tailwind'],
-    links: { repo: [gh('magnusson-back'), gh('magnusson-front')] },
-    briefing: {
-      contexto: 'Loja virtual de uma marca de polos com posicionamento premium.',
-      desafio: 'Entregar uma experiência de compra cuidada e um backoffice para operar a loja.',
-      construi: 'Backend Spring Boot + PostgreSQL em Docker (com health check e testes), frontend Next.js + React + TypeScript + Tailwind com carrinho, e backoffice em Next.js.',
-      decisoes: [
-        'Health check e testes no backend desde o início.',
-        'Loja e backoffice como aplicações separadas sobre a mesma API.',
-      ],
-      resultado: 'Loja com carrinho e backoffice funcionando sobre a mesma API.',
+    "slug": "magnossao",
+    "nome": "MAGNOSSÃO",
+    "categorias": [
+      "Backend",
+      "Frontend"
+    ],
+    "destaque": false,
+    "resumo": "E-commerce premium de polos (\"Raiz nórdica. Alma brasileira.\") com loja, carrinho e backoffice.",
+    "stack": [
+      "Spring Boot",
+      "PostgreSQL",
+      "Docker",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "magnusson-back",
+          "url": "https://github.com/gustavomf1/magnusson-back"
+        },
+        {
+          "label": "magnusson-front",
+          "url": "https://github.com/gustavomf1/magnusson-front"
+        }
+      ]
     },
+    "briefing": {
+      "contexto": "Loja virtual de uma marca de polos com posicionamento premium.",
+      "desafio": "Entregar vitrine, carrinho e gestão da loja com a mesma base.",
+      "construi": [
+        "Backend Spring Boot + PostgreSQL + Docker, com health check e testes.",
+        "Frontend Next.js + React + TypeScript + Tailwind com carrinho.",
+        "Backoffice em Next.js."
+      ],
+      "decisoes": [
+        "Loja e backoffice como aplicações separadas consumindo a mesma API."
+      ],
+      "resultado": "E-commerce completo, da vitrine à administração."
+    },
+    "slot": "magnossao.png"
   },
   {
-    slug: 'holonet-planets',
-    nome: 'Holonet Planets',
-    categorias: ['Backend', 'Frontend'],
-    destaque: false,
-    selo: 'Projeto temático',
-    resumo: 'API Spring Boot de planetas do universo Star Wars, com frontend em Next.js e Tailwind.',
-    stack: ['Spring Boot', 'Next.js', 'Tailwind'],
-    links: { repo: [gh('project-starwars')] },
-    briefing: {
-      contexto: 'Projeto temático de estudo com o universo Star Wars.',
-      desafio: 'Modelar e servir dados de planetas com uma API limpa e consumi-los numa interface agradável.',
-      construi: 'API REST em Spring Boot de planetas e frontend em Next.js com Tailwind.',
-      decisoes: ['API primeiro, interface depois, com contrato estável entre as duas.'],
-      resultado: 'Mini Holonet funcional, com API e interface completas.',
+    "slug": "holonet-planets",
+    "nome": "Holonet Planets",
+    "categorias": [
+      "Backend",
+      "Frontend"
+    ],
+    "destaque": false,
+    "resumo": "API Spring Boot de planetas da galáxia, com frontend em Next.js + Tailwind. O projeto temático da casa.",
+    "stack": [
+      "Spring Boot",
+      "Next.js",
+      "Tailwind"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "project-starwars",
+          "url": "https://github.com/gustavomf1/project-starwars"
+        }
+      ]
     },
-  },
+    "briefing": {
+      "contexto": "Projeto temático: um catálogo de planetas servido por API própria.",
+      "desafio": "Construir API e interface simples, bem estruturadas e agradáveis de navegar.",
+      "construi": [
+        "API REST em Spring Boot.",
+        "Frontend em Next.js + Tailwind."
+      ],
+      "decisoes": [
+        "Separação clara entre API e cliente."
+      ],
+      "resultado": "Um arquivo da Holonet pronto para consulta."
+    },
+    "slot": "holonet.png"
+  }
 ];

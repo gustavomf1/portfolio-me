@@ -8,25 +8,20 @@ export type Project = {
   selo?: string;
   resumo: string;
   stack: string[];
-  links: { repo?: string[]; demo?: string; privado?: boolean };
+  links: { repo?: { label: string; url: string }[]; demo?: string; privado?: boolean };
   briefing: {
     contexto: string;
     desafio: string;
-    construi: string;
+    construi: string[];
     decisoes: string[];
     resultado: string;
   };
-  // SLOT DE IMAGEM: caminho de um print em public/assets/projects/, ex.: '/assets/projects/safecore.png'
-  imagem?: string;
+  diagrama?: boolean; // mostra o diagrama animado de eventos (Kafka)
+  slot?: string; // nome sugerido do print em public/assets/projects/
+  imagem?: string; // SLOT DE IMAGEM: caminho do print, ex.: '/assets/projects/safecore.png'
 };
 
 export type SkillLevel = 'Dia a dia' | 'Confortável' | 'Estudando';
-export type SkillGroup = { categoria: string; itens: { nome: string; nivel: SkillLevel }[] };
+export type SkillGroup = { icon: string; categoria: string; itens: { nome: string; nivel: SkillLevel }[] };
 
-export type Experience = {
-  titulo: string;
-  org: string;
-  periodo: string;
-  local?: string;
-  itens: string[];
-};
+export type Experience = { periodo: string; tipo: string; cargo: string; org: string; descricao: string };
