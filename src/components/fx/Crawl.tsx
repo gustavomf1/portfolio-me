@@ -1,6 +1,6 @@
 'use client';
 import { useSyncExternalStore } from 'react';
-import { safeGet, safeSet } from '@/lib/storage';
+import { sessionGet, sessionSet } from '@/lib/storage';
 import { useAudio } from '@/lib/useAudio';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 
@@ -8,9 +8,9 @@ const KEY = 'sith:crawl-seen';
 const EVT = 'sith:crawl';
 
 const subscribe = (cb: () => void) => { window.addEventListener(EVT, cb); return () => window.removeEventListener(EVT, cb); };
-const getSeen = () => safeGet(KEY) === '1';
+const getSeen = () => sessionGet(KEY) === '1';
 
-// Abertura estilo "opening crawl", em vermelho. Só na primeira visita; "Pular introdução" sempre visível.
+// Abertura estilo "opening crawl", em vermelho. Uma vez por sessão (aba); "Pular introdução" sempre visível.
 export function Crawl() {
   // Servidor renderiza o crawl; o script do <head> o esconde por CSS para quem já viu (html.crawl-seen).
   const seen = useSyncExternalStore(subscribe, getSeen, () => false);
@@ -18,7 +18,7 @@ export function Crawl() {
   const { unlock } = useAudio();
   if (seen) return null;
 
-  const finish = () => { safeSet(KEY, '1'); window.dispatchEvent(new Event(EVT)); };
+  const finish = () => { sessionSet(KEY, '1'); window.dispatchEvent(new Event(EVT)); };
   const skip = () => { unlock(); finish(); };
 
   return (
