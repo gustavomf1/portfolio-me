@@ -23,12 +23,13 @@ test('clear e exit', () => {
   expect(runCommand('exit').action).toBe('close');
 });
 
-test('contact mostra só GitHub e LinkedIn, sem e-mail nem telefone', () => {
+test('contact mostra e-mail, WhatsApp, GitHub e LinkedIn como texto simples (sem links de ação)', () => {
   const txt = runCommand('contact').lines.join('\n');
+  expect(txt).toMatch(/@/);
+  expect(txt).toMatch(/99757-7550/);
   expect(txt).toMatch(/github\.com/);
   expect(txt).toMatch(/linkedin\.com/);
-  expect(txt).not.toMatch(/@/);
-  expect(txt).not.toMatch(/\d{4,}/);
+  expect(txt).not.toMatch(/mailto:|wa\.me/);
 });
 
 test('sudo com outro comando é negado com humor', () => {

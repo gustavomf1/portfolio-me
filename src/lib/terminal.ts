@@ -23,7 +23,7 @@ export function runCommand(input: string): TerminalResult {
     case 'about': return { lines: [`${profile.nome}, ${profile.cargo}.`, profile.local, profile.sobre] };
     case 'skills': return { lines: skillGroups.map((g) => `${g.categoria}: ${g.itens.map((i) => i.nome).join(', ')}`) };
     case 'projects': return { lines: projects.map((p) => `- ${p.nome}: ${p.resumo}`) };
-    case 'contact': return { lines: [`GitHub: ${profile.github}`, `LinkedIn: ${profile.linkedin}`, `Currículo: ${profile.curriculo}`] };
+    case 'contact': return { lines: [`E-mail: ${profile.email}`, `WhatsApp: ${profile.whatsappExibido}`, `GitHub: ${profile.github}`, `LinkedIn: ${profile.linkedin}`] };
     case 'sudo hire gustavo':
       return { lines: ['Acesso concedido. O Império aprova esta contratação.', 'Abrindo canal de comunicação...'], action: 'open-contact' };
     case 'clear': return { lines: [], action: 'clear' };

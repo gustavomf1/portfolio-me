@@ -7,6 +7,8 @@ export const profile = {
   frase: 'Construo sistemas que resistem à escuridão.',
   fraseFinal: 'Que a Força (e os testes) estejam com você.',
   local: 'Pirapozinho, SP · disponível para remoto e presencial',
+  email: 'gustavo_mf1@hotmail.com', // exibido como texto simples (sem link)
+  whatsappExibido: '(18) 99757-7550', // exibido como texto simples (sem link)
   github: 'https://github.com/gustavomf1',
   linkedin: 'https://www.linkedin.com/in/gustavo-martins-fran%C3%A7a',
   curriculo: asset('/Curriculo-Gustavo-Martins-Franca.pdf'), // gerado de docs/curriculo/curriculo.html
