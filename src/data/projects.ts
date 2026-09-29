@@ -161,7 +161,8 @@ export const projects: Project[] = [
       "TanStack Query",
       "Gemini API",
       "Jest",
-      "JWT"
+      "JWT",
+      "Vercel"
     ],
     "links": {
       "repo": [
@@ -271,7 +272,10 @@ export const projects: Project[] = [
       "Angular",
       "Tailwind",
       "ESP32",
-      "PlatformIO"
+      "PlatformIO",
+      "Google Cloud Run",
+      "Cloudflare Workers",
+      "Supabase"
     ],
     "links": {
       "repo": [
@@ -288,11 +292,13 @@ export const projects: Project[] = [
       "construi": [
         "Backend Quarkus com Java 21 e PostgreSQL.",
         "Frontend Angular + Tailwind.",
-        "Firmware ESP32 (PlatformIO/Arduino) com simulação no Wokwi."
+        "Firmware ESP32 (PlatformIO/Arduino) com simulação no Wokwi.",
+        "Deploy em produção: backend Quarkus em container no Google Cloud Run, frontend Angular como assets estáticos no Cloudflare Workers e PostgreSQL gerenciado no Supabase."
       ],
       "decisoes": [
         "Monorepo reunindo firmware, API e interface.",
-        "Simulação Wokwi para desenvolver o firmware sem depender do hardware."
+        "Simulação Wokwi para desenvolver o firmware sem depender do hardware.",
+        "Dockerfile multi-stage que compila com Maven dentro do próprio build, permitindo deploy direto do código-fonte no Cloud Run."
       ],
       "resultado": "Fluxo completo do leitor RFID até a tela."
     },
@@ -326,7 +332,10 @@ export const projects: Project[] = [
       "Claude",
       "OpenAI",
       "Ollama",
-      "JWT"
+      "JWT",
+      "GitHub Actions",
+      "Docker",
+      "GHCR"
     ],
     "links": {
       "privado": true
@@ -339,12 +348,16 @@ export const projects: Project[] = [
         "Integrações com brapi, Binance e BCB.",
         "Camada de IA com abstração de provedores (Claude, OpenAI, Ollama).",
         "Templates de prompt versionados e validador determinístico de saída (guardrails).",
-        "Scheduler, JWT/bcrypt e testes."
+        "Scheduler, JWT/bcrypt e testes.",
+        "CI no GitHub Actions a cada push e pull request em main e develop: lint com ruff e testes com pytest contra PostgreSQL 16 e Redis 7 em service containers.",
+        "Publicação da imagem Docker no GitHub Container Registry (GHCR) em releases e tags de versão.",
+        "Estrutura de CD com ambientes de staging e produção, com aprovação manual antes de produção."
       ],
       "decisoes": [
         "Repositórios por interface para trocar persistência sem tocar no domínio.",
         "Prompts versionados como artefato do código.",
-        "Migrations com Alembic."
+        "Migrations com Alembic.",
+        "Testes de integração rodam contra serviços reais (PostgreSQL e Redis com health checks) em vez de mocks."
       ],
       "resultado": "Backend único servindo três clientes, com troca de provedor de LLM por configuração."
     },

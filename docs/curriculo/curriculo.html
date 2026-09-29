@@ -17,7 +17,7 @@
     .subtitle { font-size: 10.2pt; color: #b3120c; font-weight: 600; margin: 2px 0 4px; }
     .contact { font-size: 8.6pt; color: #4b5563; font-family: 'Arial', sans-serif; }
     .contact a { color: #b3120c; text-decoration: none; }
-    section { margin-top: 8px; }
+    section { margin-top: 7px; }
     h2 { font-size: 8.2pt; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #0d1b2a; border-bottom: 1.5px solid #0d1b2a; padding-bottom: 2px; margin-bottom: 5px; font-family: 'Arial', sans-serif; }
     .resumo p { font-size: 9.1pt; color: #374151; text-align: justify; }
     .entry { margin-bottom: 6px; }
@@ -32,7 +32,7 @@
     .skills-grid { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 8.7pt; }
     .skill-label { font-weight: 700; color: #0d1b2a; font-family: 'Arial', sans-serif; white-space: nowrap; }
     .skill-value { color: #374151; }
-    @media print { body { padding: 18px 32px; } @page { margin: 0; size: A4; } }
+    @media print { body { padding: 14px 32px; } @page { margin: 0; size: A4; } }
   </style>
 </head>
 <body>
@@ -143,9 +143,9 @@
         <div class="entry-meta">github.com/gustavomf1</div>
       </div>
       <ul class="bullets">
-        <li><strong>Insight Flow</strong> (em equipe): análise de ativos financeiros com FastAPI em camadas, migrations Alembic, IA multi-provedor (Claude, OpenAI, Ollama) e validador determinístico da saída</li>
+        <li><strong>Insight Flow</strong> (em equipe): análise de ativos financeiros com FastAPI em camadas, migrations Alembic, IA multi-provedor (Claude, OpenAI, Ollama) e validador determinístico da saída; <strong>CI no GitHub Actions</strong> (ruff + pytest com PostgreSQL e Redis em service containers) e publicação de imagem Docker no GHCR</li>
         <li><strong>Microsserviços Event-Driven:</strong> 4 serviços Quarkus com Kafka, OpenTelemetry e propagação de token OIDC no gateway BFF</li>
-        <li><strong>LogTrack:</strong> rastreamento de lotes via RFID, com Quarkus/Java 21, Angular e firmware ESP32 (IoT)</li>
+        <li><strong>LogTrack:</strong> rastreamento de lotes via RFID, com Quarkus/Java 21, Angular e firmware ESP32 (IoT); <strong>em produção</strong>: backend no Google Cloud Run, frontend no Cloudflare Workers e PostgreSQL no Supabase</li>
       </ul>
     </div>
   </section>
@@ -165,8 +165,8 @@
       <span class="skill-value">PostgreSQL, Oracle, MySQL, Redis, Drizzle ORM, Flyway; modelagem relacional e migrations versionadas</span>
       <span class="skill-label">Mensageria</span>
       <span class="skill-value">Apache Kafka, RabbitMQ, WebSocket/STOMP, OpenTelemetry</span>
-      <span class="skill-label">Testes / DevOps</span>
-      <span class="skill-value">Jest, JUnit, Mockito, TestContainers, Git, Docker, Docker Compose, CI/CD, AWS S3, Linux</span>
+      <span class="skill-label">Testes, CI/CD, Cloud</span>
+      <span class="skill-value">Jest, JUnit, Mockito, TestContainers, pytest; GitHub Actions (lint, testes com service containers, publicação no GHCR), Docker, Docker Compose, Google Cloud Run, Cloudflare Workers, Vercel, AWS S3, Git, Linux</span>
       <span class="skill-label">Práticas</span>
       <span class="skill-value">Clean Code, SOLID, arquitetura multi-tenant, microsserviços e event-driven, metodologias ágeis</span>
     </div>

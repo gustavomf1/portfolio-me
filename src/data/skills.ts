@@ -258,7 +258,7 @@ export const skillGroups: SkillGroup[] = [
         "nivel": "Dia a dia"
       },
       {
-        "nome": "GitHub Actions",
+        "nome": "GitHub Actions (CI/CD)",
         "nivel": "Confortável"
       },
       {
@@ -272,6 +272,22 @@ export const skillGroups: SkillGroup[] = [
       {
         "nome": "Git",
         "nivel": "Dia a dia"
+      },
+      {
+        "nome": "GHCR (Container Registry)",
+        "nivel": "Confortável"
+      },
+      {
+        "nome": "Google Cloud Run",
+        "nivel": "Confortável"
+      },
+      {
+        "nome": "Cloudflare Workers",
+        "nivel": "Confortável"
+      },
+      {
+        "nome": "Vercel",
+        "nivel": "Confortável"
       }
     ]
   },
