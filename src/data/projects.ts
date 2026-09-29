@@ -93,16 +93,7 @@ export const projects: Project[] = [
       "Docker Compose"
     ],
     "links": {
-      "repo": [
-        {
-          "label": "leilao-backend",
-          "url": "https://github.com/gustavomf1/leilao-backend"
-        },
-        {
-          "label": "leilao-frontend",
-          "url": "https://github.com/gustavomf1/leilao-frontend"
-        }
-      ]
+      "privado": true
     },
     "briefing": {
       "contexto": "ERP para operação de leilões com lances ao vivo e gestão financeira.",

@@ -108,7 +108,7 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
               <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="btn">{l.label} ↗</a>
             ))}
             {project.links.privado && (
-              <span className="flex items-center gap-2 font-mono text-xs tracking-[.08em] text-ash"><Lock /> Repositório privado, código sob NDA/comercial</span>
+              <span className="flex items-center gap-2 font-mono text-xs tracking-[.08em] text-ash"><span className="text-ember"><Lock /></span> Repositório privado, código sob NDA/comercial</span>
             )}
           </div>
         </div>

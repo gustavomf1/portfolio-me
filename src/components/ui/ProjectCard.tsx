@@ -8,9 +8,17 @@ import { ProjectMockup } from './ProjectMockup';
 
 export function Lock() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" role="img" aria-label="Repositório privado">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
       <rect x="5" y="11" width="14" height="10" rx="1" /><path d="M8 11V7a4 4 0 018 0v4" />
     </svg>
+  );
+}
+
+export function PrivadoBadge() {
+  return (
+    <span title="Repositório privado" className="flex shrink-0 items-center gap-1.5 border border-sith/60 px-2 py-1 font-mono text-[11px] uppercase tracking-[.14em] text-ember">
+      <Lock /> Privado
+    </span>
   );
 }
 
@@ -44,7 +52,7 @@ export function ProjectCard({ project, onOpen }: { project: Project; onOpen: () 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-center justify-between gap-3">
           <h3 className="m-0 font-display text-lg font-bold uppercase tracking-[.08em]">{project.nome}</h3>
-          {project.links.privado && <span className="text-ash"><Lock /></span>}
+          {project.links.privado && <PrivadoBadge />}
         </div>
         <p className="m-0 text-[15px] leading-relaxed text-[#c9c4bf]">{project.resumo}</p>
         <ul className="m-0 mt-auto flex list-none flex-wrap gap-1.5 p-0 pt-2">
