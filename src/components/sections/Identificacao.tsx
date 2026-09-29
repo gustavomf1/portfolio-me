@@ -1,5 +1,6 @@
 import { profile } from '@/data/profile';
 import { Counter } from '@/components/ui/Counter';
+import { asset } from '@/lib/paths';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -23,6 +24,21 @@ export function Identificacao() {
           <div className="flex justify-between border-b border-blood/35 px-[18px] py-3 font-mono text-[11px] tracking-[.2em] text-ash">
             <span>FICHA · GMF-0001</span>
             <span className="text-sith" style={{ animation: 'pulseGlow 2s infinite' }}>● ATIVO</span>
+          </div>
+          <div className="relative border-b border-blood/35">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={asset('/assets/gustavo.webp')}
+              alt="Gustavo Martins França sorrindo, de jaqueta preta, fazendo sinal de positivo com a mão"
+              width={620}
+              height={620}
+              loading="lazy"
+              className="block aspect-square w-full object-cover object-top"
+              style={{ filter: 'contrast(1.05) saturate(.85)' }}
+            />
+            {/* Tratamento no tema: escurece as bordas e adiciona um leve vermelho embaixo, como foto de crachá. */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(139,0,0,.45), transparent 45%), radial-gradient(ellipse at center, transparent 55%, rgba(5,5,5,.55))' }} />
+            <span className="absolute bottom-3 left-4 font-mono text-[11px] tracking-[.2em] text-bone" style={{ textShadow: '0 0 8px #000' }}>GUSTAVO M. FRANÇA</span>
           </div>
           {fatos.map((f) => (
             <div key={f.k} className="grid gap-3 border-b border-blood/15 px-[18px] py-3.5" style={{ gridTemplateColumns: '120px 1fr' }}>
