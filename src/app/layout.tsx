@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${orbitron.variable} ${manrope.variable} ${jetbrains.variable}`}>
-      <body>{children}</body>
+      <body className="grain scanlines">{children}</body>
     </html>
   );
 }

@@ -1,0 +1,92 @@
+'use client';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useAudio } from '@/lib/useAudio';
+import { Logo } from './Logo';
+
+export const SECTIONS = [
+  { id: 'inicio', label: 'Início' },
+  { id: 'identificacao', label: 'Identificação' },
+  { id: 'arsenal', label: 'Arsenal' },
+  { id: 'missoes', label: 'Missões' },
+  { id: 'campanhas', label: 'Campanhas' },
+  { id: 'ia', label: 'IA' },
+  { id: 'comunicacao', label: 'Comunicação' },
+] as const;
+
+export function Nav() {
+  const { play } = useAudio();
+  const [active, setActive] = useState<string>('inicio');
+  const [open, setOpen] = useState(false);
+  const [blade, setBlade] = useState({ left: 0, width: 0 });
+  const refs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    SECTIONS.forEach((s) => { const el = document.getElementById(s.id); if (el) io.observe(el); });
+    return () => io.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = refs.current[active];
+      if (el) setBlade({ left: el.offsetLeft, width: el.offsetWidth });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [active]);
+
+  const go = () => { play('swing'); setOpen(false); };
+
+  return (
+    <nav
+      aria-label="Principal"
+      className="fixed inset-x-0 top-0 z-[200] flex h-[68px] items-center justify-between gap-5 border-b border-blood/30 bg-void/75 px-[clamp(16px,4vw,40px)] backdrop-blur-md"
+    >
+      <Logo />
+      <button
+        type="button"
+        className="md:hidden grid h-10 w-10 place-items-center"
+        aria-label="Menu"
+        aria-expanded={open}
+        aria-controls="menu-lista"
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span aria-hidden="true" className="relative block h-[2px] w-6 bg-sith shadow-[0_0_8px_#e10600] before:absolute before:-top-2 before:h-[2px] before:w-6 before:bg-sith after:absolute after:top-2 after:h-[2px] after:w-6 after:bg-sith" />
+      </button>
+      <ul
+        id="menu-lista"
+        className={`${open ? 'fixed inset-x-0 top-[68px] flex flex-col bg-void/95 p-6 gap-5 border-b border-blood/40' : 'hidden'} md:static md:flex md:flex-row md:items-center md:gap-7 md:p-0 md:bg-transparent md:border-0`}
+      >
+        {SECTIONS.map((s) => (
+          <li key={s.id}>
+            <a
+              href={`#${s.id}`}
+              ref={(el) => { refs.current[s.id] = el; }}
+              onClick={go}
+              onMouseEnter={() => play('blip')}
+              aria-current={active === s.id ? 'true' : undefined}
+              className={`font-mono text-[13px] uppercase tracking-[.14em] ${active === s.id ? 'text-bone' : 'text-ash'} hover:text-bone`}
+            >
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 hidden h-[3px] md:block"
+        style={{
+          left: blade.left,
+          width: blade.width,
+          transition: 'left .35s ease, width .35s ease',
+          background: 'linear-gradient(90deg,#8b0000,#ff2a1f)',
+          boxShadow: '0 0 12px #e10600',
+        }}
+      />
+    </nav>
+  );
+}
