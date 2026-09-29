@@ -74,3 +74,5 @@ a:hover { color: var(--color-bone); }
 
 /* Konami: o site "cai" para o lado luz por 3 s (o vermelho vira azul-ciano). */
 html.light-side body { filter: hue-rotate(180deg) brightness(1.15); transition: filter .6s; }
+
+html.crawl-seen [data-crawl] { display: none; }

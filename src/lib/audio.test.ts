@@ -40,6 +40,13 @@ test('efeito sem AudioContext é no-op', () => {
   expect(() => eng.play('swing')).not.toThrow();
 });
 
+test('isUnlocked só fica verdadeiro depois do primeiro unlock', () => {
+  const eng = createAudioEngine(deps(fakeMedia(false)));
+  expect(eng.isUnlocked()).toBe(false);
+  eng.unlock();
+  expect(eng.isUnlocked()).toBe(true);
+});
+
 test('música inicia com volume 0 e usa loop', () => {
   const el = fakeMedia(false);
   const eng = createAudioEngine(deps(el));

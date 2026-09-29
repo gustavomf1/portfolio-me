@@ -2,15 +2,9 @@
 import dynamic from 'next/dynamic';
 import { useCallback, useState, useSyncExternalStore } from 'react';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { hasWebGL } from '@/lib/webgl';
 
 const DeathStar3D = dynamic(() => import('./DeathStar3D'), { ssr: false });
-
-function hasWebGL(): boolean {
-  try {
-    const c = document.createElement('canvas');
-    return !!(c.getContext('webgl2') || c.getContext('webgl'));
-  } catch { return false; }
-}
 
 const noop = () => () => {};
 // 3D só com WebGL e sem reduced-motion; no servidor cai para a versão estática.

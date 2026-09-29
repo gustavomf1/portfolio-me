@@ -12,7 +12,8 @@ const getSeen = () => safeGet(KEY) === '1';
 
 // Abertura estilo "opening crawl", em vermelho. Só na primeira visita; "Pular introdução" sempre visível.
 export function Crawl() {
-  const seen = useSyncExternalStore(subscribe, getSeen, () => true);
+  // Servidor renderiza o crawl; o script do <head> o esconde por CSS para quem já viu (html.crawl-seen).
+  const seen = useSyncExternalStore(subscribe, getSeen, () => false);
   const reduced = useReducedMotion();
   const { unlock } = useAudio();
   if (seen) return null;
@@ -21,7 +22,7 @@ export function Crawl() {
   const skip = () => { unlock(); finish(); };
 
   return (
-    <div role="dialog" aria-label="Introdução" className="fixed inset-0 z-[10000] overflow-hidden bg-void">
+    <div data-crawl role="dialog" aria-label="Introdução" className="fixed inset-0 z-[10000] overflow-hidden bg-void">
       {!reduced && (
         <p className="absolute left-1/2 top-[44%] m-0 w-[min(90%,640px)] -translate-x-1/2 text-center text-[clamp(18px,2.4vw,26px)] leading-normal text-ash opacity-0" style={{ animation: 'introPre 4.2s ease both' }}>
           Há pouco tempo, numa cidade não muito distante…

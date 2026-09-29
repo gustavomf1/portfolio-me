@@ -1,7 +1,8 @@
+import { asset } from './paths';
 import { safeGet, safeSet } from './storage';
 
 export const MUSIC_VOLUME = 0.08; // volume de fundo, ajuste aqui
-export const MUSIC_SRC = '/assets/sounds/emperor-theme.mp3'; // TROCAR aqui pela faixa desejada
+export const MUSIC_SRC = asset('/assets/sounds/emperor-theme.mp3'); // TROCAR aqui pela faixa desejada
 const FADE_MS = 3000;
 const MUTE_KEY = 'sith:muted';
 
@@ -109,6 +110,7 @@ export function createAudioEngine(deps: Deps) {
       emit();
     },
     isMuted: () => muted,
+    isUnlocked: () => unlocked,
     subscribe(fn: () => void) { listeners.add(fn); return () => { listeners.delete(fn); }; },
     pauseForBackground() { media?.pause(); },
     resumeFromBackground() { if (!muted && unlocked && media && media.paused) media.play()?.catch(() => {}); },

@@ -1,4 +1,5 @@
 'use client';
+import { audio } from '@/lib/audio';
 import { useAudio } from '@/lib/useAudio';
 
 export function MuteButton() {
@@ -6,7 +7,12 @@ export function MuteButton() {
   return (
     <button
       type="button"
-      onClick={() => { unlock(); toggle(); }}
+      onClick={() => {
+        // Primeiro clique com o som "ligado" só inicia a trilha; senão o visitante que quer som ficaria mudo.
+        const startOnly = !audio.isUnlocked() && !audio.isMuted();
+        unlock();
+        if (!startOnly) toggle();
+      }}
       aria-label={muted ? 'Ativar som' : 'Desativar som'}
       aria-pressed={!muted}
       className="fixed bottom-4 left-4 z-[250] grid h-11 w-11 place-items-center border border-blood bg-void/80 text-bone backdrop-blur hover:shadow-[0_0_18px_rgba(225,6,0,.5)]"

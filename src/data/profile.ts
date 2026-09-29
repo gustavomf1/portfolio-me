@@ -1,3 +1,5 @@
+import { asset } from '@/lib/paths';
+
 export const profile = {
   nome: 'Gustavo Martins França',
   cargo: 'Engenheiro de Software Full Stack',
@@ -9,7 +11,7 @@ export const profile = {
   github: 'https://github.com/gustavomf1',
   linkedin: 'https://www.linkedin.com/in/gustavo-martins-fran%C3%A7a',
   whatsapp: 'https://wa.me/55XXXXXXXXXXX', // TROCAR: coloque seu número (DDI+DDD+número)
-  curriculo: '/curriculo.pdf', // TROCAR: substitua public/curriculo.pdf pelo seu currículo
+  curriculo: asset('/curriculo.pdf'), // TROCAR: substitua public/curriculo.pdf pelo seu currículo
   formspree: '', // OPCIONAL: URL do endpoint Formspree; vazio usa mailto
   sobre:
     'Desenvolvedor full stack de Pirapozinho, SP, no último ano de Sistemas de Informação (Toledo Prudente Centro Universitário, conclusão prevista em 2026). Trabalho com Java/Spring Boot, TypeScript/React/Next.js/NestJS e IA aplicada em produção. Construo SaaS de ponta a ponta e gosto de unir produto, arquitetura e IA.',

@@ -39,6 +39,6 @@ Código Konami, 5 cliques no logo, digitar `sith` (abre o terminal) e o console 
 ## Deploy
 
 - **Vercel:** importe o repositório; framework Next.js, sem configuração extra.
-- **GitHub Pages:** publique a pasta `out/`. Em subcaminho (`usuario.github.io/repo`), defina `basePath` em `next.config.ts`.
+- **GitHub Pages:** publique a pasta `out/` (já inclui `.nojekyll`). Em subcaminho (`usuario.github.io/repo`), rode o build com `NEXT_PUBLIC_BASE_PATH=/repo npm run build`; a trilha de áudio e o currículo respeitam esse prefixo. Prints em `imagem` (`src/data/projects.ts`) devem usar `asset('/assets/projects/...')` de `src/lib/paths.ts`.
 
 Projeto de fã, sem afiliação com Lucasfilm ou Disney.

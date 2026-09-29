@@ -5,9 +5,10 @@ test('funciona com localStorage', () => {
   expect(safeGet('k')).toBe('v');
 });
 
-test('não lança quando localStorage lança', () => {
+test('sem localStorage, o valor gravado continua legível em memória', () => {
   vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked'); });
   vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked'); });
-  expect(safeGet('k')).toBeNull();
-  expect(() => safeSet('k', 'v')).not.toThrow();
+  expect(safeGet('mem-a')).toBeNull();
+  expect(() => safeSet('mem-a', 'v')).not.toThrow();
+  expect(safeGet('mem-a')).toBe('v');
 });
