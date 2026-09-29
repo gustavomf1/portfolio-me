@@ -36,7 +36,7 @@ export function Holocron() {
           <div className="flex flex-col gap-4 p-4">
             <div>
               <div className="font-display text-base font-bold">{profile.nome}</div>
-              <div className="mt-1 text-[13px] text-ash">{profile.cargo} · Pirapozinho, SP · remoto</div>
+              <div className="mt-1 text-[13px] text-ash">{profile.cargo} · Pirapozinho, SP · remoto e presencial</div>
             </div>
             <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">{stack.map((t) => <li key={t} className="chip">{t}</li>)}</ul>
             <div className="flex flex-col gap-1.5 text-[13px]">

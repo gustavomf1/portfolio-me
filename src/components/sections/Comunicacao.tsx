@@ -10,7 +10,7 @@ const contatos = [
   { k: 'E-MAIL', v: profile.email, url: `mailto:${profile.email}` },
   { k: 'GITHUB', v: 'github.com/gustavomf1', url: profile.github },
   { k: 'LINKEDIN', v: 'linkedin.com/in/gustavo-martins-frança', url: profile.linkedin },
-  { k: 'WHATSAPP', v: 'Chamar no WhatsApp', url: profile.whatsapp },
+  { k: 'WHATSAPP', v: profile.whatsappExibido, url: profile.whatsapp },
   { k: 'CURRÍCULO', v: 'Baixar PDF', url: profile.curriculo },
 ];
 

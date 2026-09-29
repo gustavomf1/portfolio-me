@@ -5,7 +5,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const fatos = [
   { k: 'LOCAL', v: 'Pirapozinho, SP' },
-  { k: 'MODALIDADE', v: 'Remoto' },
+  { k: 'MODALIDADE', v: 'Remoto e presencial' },
   { k: 'FORMAÇÃO', v: 'Sistemas de Informação · 2026' },
   { k: 'FOCO', v: 'Full stack · SaaS · IA aplicada' },
 ];

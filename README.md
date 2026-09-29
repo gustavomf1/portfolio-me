@@ -20,7 +20,6 @@ Tudo em `src/data/*.ts` (perfil, projetos, skills, experiência, pipeline de IA)
 
 | O quê | Onde |
 | --- | --- |
-| WhatsApp | `src/data/profile.ts` (`whatsapp`, formato `https://wa.me/55DDDNUMERO`) |
 | Currículo (PDF) | substitua `public/curriculo.pdf` |
 | Formulário via Formspree (opcional) | `src/data/profile.ts` (`formspree`); vazio usa `mailto:` |
 | URL final do site (Open Graph) | variável `NEXT_PUBLIC_SITE_URL` |

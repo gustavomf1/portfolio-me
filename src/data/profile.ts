@@ -6,11 +6,12 @@ export const profile = {
   subtitulo: 'TypeScript · Java · PostgreSQL · IA Generativa',
   frase: 'Construo sistemas que resistem à escuridão.',
   fraseFinal: 'Que a Força (e os testes) estejam com você.',
-  local: 'Pirapozinho, SP · disponível para remoto',
+  local: 'Pirapozinho, SP · disponível para remoto e presencial',
   email: 'gustavo_mf1@hotmail.com',
   github: 'https://github.com/gustavomf1',
   linkedin: 'https://www.linkedin.com/in/gustavo-martins-fran%C3%A7a',
-  whatsapp: 'https://wa.me/55XXXXXXXXXXX', // TROCAR: coloque seu número (DDI+DDD+número)
+  whatsapp: 'https://wa.me/5518997577550',
+  whatsappExibido: '(18) 99757-7550',
   curriculo: asset('/curriculo.pdf'), // TROCAR: substitua public/curriculo.pdf pelo seu currículo
   formspree: '', // OPCIONAL: URL do endpoint Formspree; vazio usa mailto
   sobre:
