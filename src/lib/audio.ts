@@ -1,5 +1,5 @@
 import { asset } from './paths';
-import { safeGet, safeSet } from './storage';
+import { sessionGet, sessionSet } from './storage';
 
 export const MUSIC_VOLUME = 0.08; // volume de fundo, ajuste aqui
 export const MUSIC_SRC = asset('/assets/sounds/emperor-theme.mp3'); // TROCAR aqui pela faixa desejada
@@ -15,7 +15,8 @@ export function createAudioEngine(deps: Deps) {
   let ctx: AudioContext | null = null;
   let unlocked = false;
   let mediaTried = false;
-  let muted = safeGet(MUTE_KEY) === '1';
+  // Padrão: som ligado. Se o visitante silenciar, vale só na sessão (aba); numa visita nova volta ligado.
+  let muted = sessionGet(MUTE_KEY) === '1';
   let fade: ReturnType<typeof setInterval> | null = null;
   let humNode: { stop: () => void } | null = null;
   const listeners = new Set<() => void>();
@@ -123,7 +124,7 @@ export function createAudioEngine(deps: Deps) {
     play,
     setMuted(m: boolean) {
       muted = m;
-      safeSet(MUTE_KEY, m ? '1' : '0');
+      sessionSet(MUTE_KEY, m ? '1' : '0');
       if (m) { stopFade(); media?.pause(); humNode?.stop(); }
       else if (media) fadeMusicIn();
       emit();

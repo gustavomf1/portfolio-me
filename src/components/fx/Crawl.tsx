@@ -25,7 +25,7 @@ export function Crawl() {
     if (seen) return;
     if (!reduced) audio.tryStart();
     const start = () => audio.unlock();
-    const events = ['pointerdown', 'keydown', 'touchstart'] as const;
+    const events = ['pointerdown', 'pointerup', 'keydown', 'touchend'] as const;
     events.forEach((e) => window.addEventListener(e, start, { once: true, passive: true }));
     return () => events.forEach((e) => window.removeEventListener(e, start));
   }, [seen, reduced]);

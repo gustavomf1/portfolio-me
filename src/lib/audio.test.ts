@@ -10,7 +10,7 @@ function fakeMedia(rejects: boolean) {
 const deps = (el: HTMLAudioElement) => ({ createMedia: () => el, createContext: () => null });
 
 test('preferência de mudo salva impede a música', () => {
-  localStorage.setItem('sith:muted', '1');
+  sessionStorage.setItem('sith:muted', '1');
   const el = fakeMedia(false);
   const eng = createAudioEngine(deps(el));
   eng.unlock();
@@ -32,7 +32,8 @@ test('setMuted pausa e persiste', () => {
   eng.unlock();
   eng.setMuted(true);
   expect(el.pause).toHaveBeenCalled();
-  expect(localStorage.getItem('sith:muted')).toBe('1');
+  expect(sessionStorage.getItem('sith:muted')).toBe('1');
+  expect(localStorage.getItem('sith:muted')).toBeNull();
 });
 
 test('efeito sem AudioContext é no-op', () => {
@@ -102,9 +103,15 @@ test('se o navegador bloquear o autoplay, isPlaying é falso e o unlock seguinte
 });
 
 test('tryStart respeita a preferência de mudo', () => {
-  localStorage.setItem('sith:muted', '1');
+  sessionStorage.setItem('sith:muted', '1');
   const el = playableMedia();
   const eng = createAudioEngine({ createMedia: () => el, createContext: () => null });
   eng.tryStart();
   expect(el.play).not.toHaveBeenCalled();
+});
+
+test('começa desmutado: um "mudo" antigo salvo no localStorage é ignorado', () => {
+  localStorage.setItem('sith:muted', '1');
+  const eng = createAudioEngine({ createMedia: () => playableMedia(), createContext: () => null });
+  expect(eng.isMuted()).toBe(false);
 });
