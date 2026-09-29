@@ -1,5 +1,7 @@
 'use client';
-import { useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
+import { audio } from '@/lib/audio';
+import { MuteButton } from '@/components/ui/MuteButton';
 import { sessionGet, sessionSet } from '@/lib/storage';
 import { useAudio } from '@/lib/useAudio';
 import { useReducedMotion } from '@/lib/useReducedMotion';
@@ -15,7 +17,19 @@ export function Crawl() {
   // Servidor renderiza o crawl; o script do <head> o esconde por CSS para quem já viu (html.crawl-seen).
   const seen = useSyncExternalStore(subscribe, getSeen, () => false);
   const reduced = useReducedMotion();
-  const { unlock } = useAudio();
+  const { unlock, playing, muted } = useAudio();
+
+  // Música de fundo durante a intro. O navegador só libera áudio após um gesto: tentamos iniciar direto
+  // (funciona se o navegador permitir) e, se for bloqueado, o primeiro clique, toque ou tecla inicia.
+  useEffect(() => {
+    if (seen) return;
+    if (!reduced) audio.tryStart();
+    const start = () => audio.unlock();
+    const events = ['pointerdown', 'keydown', 'touchstart'] as const;
+    events.forEach((e) => window.addEventListener(e, start, { once: true, passive: true }));
+    return () => events.forEach((e) => window.removeEventListener(e, start));
+  }, [seen, reduced]);
+
   if (seen) return null;
 
   const finish = () => { sessionSet(KEY, '1'); window.dispatchEvent(new Event(EVT)); };
@@ -47,6 +61,14 @@ export function Crawl() {
           <p className="m-0">Em Pirapozinho, SP, um engenheiro full stack constrói SaaS de ponta a ponta com Java, TypeScript e PostgreSQL, e coloca inteligência artificial para trabalhar em produção.</p>
           <p className="m-0">No último ano de Sistemas de Informação, GUSTAVO MARTINS FRANÇA segue em missão: construir sistemas que resistem à escuridão…</p>
         </div>
+      </div>
+      <div className="absolute right-[clamp(16px,3vw,32px)] top-[clamp(16px,3vw,28px)] z-10 flex items-center gap-3">
+        {!playing && !muted && (
+          <span className="font-mono text-[11px] tracking-[.14em] text-ash" style={{ animation: 'pulseGlow 2s ease-in-out infinite' }}>
+            CLIQUE PARA ATIVAR O SOM
+          </span>
+        )}
+        <MuteButton />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[38%]" style={{ background: 'linear-gradient(#050505 20%,transparent)' }} />
       <button

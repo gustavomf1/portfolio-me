@@ -1,11 +1,10 @@
 'use client';
 import { useAudio } from '@/lib/useAudio';
 
-// Liga/desliga a música de fundo. Antes do primeiro clique nada toca (o navegador exige um gesto),
-// então o botão aparece como "desligado" e o primeiro clique inicia a trilha.
+// Liga/desliga a música de fundo. O botão reflete se a trilha está de fato tocando: se o navegador
+// bloqueou o autoplay, ele aparece como "desligado" e o clique inicia a trilha.
 export function MuteButton() {
-  const { muted, unlocked, toggle, unlock } = useAudio();
-  const playing = unlocked && !muted;
+  const { muted, playing, toggle, unlock } = useAudio();
   return (
     <button
       type="button"

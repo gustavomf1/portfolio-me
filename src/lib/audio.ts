@@ -14,6 +14,7 @@ export function createAudioEngine(deps: Deps) {
   let media: HTMLAudioElement | null = null;
   let ctx: AudioContext | null = null;
   let unlocked = false;
+  let mediaTried = false;
   let muted = safeGet(MUTE_KEY) === '1';
   let fade: ReturnType<typeof setInterval> | null = null;
   let humNode: { stop: () => void } | null = null;
@@ -28,7 +29,7 @@ export function createAudioEngine(deps: Deps) {
     if (!media) return;
     media.volume = 0;
     media.loop = true;
-    media.play()?.catch(() => { /* autoplay bloqueado ou arquivo ausente: segue sem trilha */ });
+    media.play()?.then(emit, () => { /* autoplay bloqueado ou arquivo ausente: segue sem trilha */ });
     const steps = 30;
     let n = 0;
     stopFade();
@@ -90,13 +91,30 @@ export function createAudioEngine(deps: Deps) {
     }
   }
 
+  // Cria o <audio> uma vez. Não baixa nada até o play (preload none).
+  function ensureMedia() {
+    if (media || mediaTried) return;
+    mediaTried = true;
+    media = deps.createMedia();
+    if (media) {
+      media.preload = 'none';
+      media.src = MUSIC_SRC;
+      media.addEventListener?.('playing', emit);
+      media.addEventListener?.('pause', emit);
+    }
+  }
+
   return {
+    // Tenta iniciar a música sem gesto (funciona só se o navegador permitir); não cria AudioContext.
+    tryStart() {
+      ensureMedia();
+      if (!muted && media && media.paused) fadeMusicIn();
+    },
     unlock() {
       if (!unlocked) {
         unlocked = true;
         ctx = deps.createContext();
-        media = deps.createMedia();
-        if (media) { media.preload = 'none'; media.src = MUSIC_SRC; }
+        ensureMedia();
       }
       if (ctx && ctx.state === 'suspended') void ctx.resume();
       if (!muted && media && media.paused) fadeMusicIn();
@@ -107,14 +125,15 @@ export function createAudioEngine(deps: Deps) {
       muted = m;
       safeSet(MUTE_KEY, m ? '1' : '0');
       if (m) { stopFade(); media?.pause(); humNode?.stop(); }
-      else if (unlocked && media) fadeMusicIn();
+      else if (media) fadeMusicIn();
       emit();
     },
     isMuted: () => muted,
     isUnlocked: () => unlocked,
+    isPlaying: () => !!media && !media.paused,
     subscribe(fn: () => void) { listeners.add(fn); return () => { listeners.delete(fn); }; },
     pauseForBackground() { media?.pause(); },
-    resumeFromBackground() { if (!muted && unlocked && media && media.paused) media.play()?.catch(() => {}); },
+    resumeFromBackground() { if (!muted && media && media.paused) media.play()?.catch(() => {}); },
   };
 }
 

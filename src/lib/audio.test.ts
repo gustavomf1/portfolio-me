@@ -63,3 +63,48 @@ test('música inicia com volume 0 e usa loop', () => {
   expect(el.volume).toBe(0);
   expect(el.play).toHaveBeenCalledTimes(1);
 });
+
+function playableMedia(rejectFirst = false) {
+  let first = rejectFirst;
+  const el = {
+    volume: 0, loop: false, preload: '', paused: true, src: '',
+    play: vi.fn((): Promise<void> => {
+      if (first) { first = false; return Promise.reject(new Error('NotAllowedError')); }
+      el.paused = false;
+      return Promise.resolve();
+    }),
+    pause: vi.fn(() => { el.paused = true; }),
+  };
+  return el as unknown as HTMLAudioElement;
+}
+
+test('tryStart toca a música sem criar AudioContext (não exige gesto)', async () => {
+  const el = playableMedia();
+  const createContext = vi.fn(() => null);
+  const eng = createAudioEngine({ createMedia: () => el, createContext });
+  eng.tryStart();
+  await Promise.resolve();
+  expect(el.play).toHaveBeenCalledTimes(1);
+  expect(createContext).not.toHaveBeenCalled();
+  expect(eng.isPlaying()).toBe(true);
+});
+
+test('se o navegador bloquear o autoplay, isPlaying é falso e o unlock seguinte toca', async () => {
+  const el = playableMedia(true);
+  const eng = createAudioEngine({ createMedia: () => el, createContext: () => null });
+  eng.tryStart();
+  await Promise.resolve(); await Promise.resolve();
+  expect(eng.isPlaying()).toBe(false);
+  eng.unlock();
+  await Promise.resolve();
+  expect(el.play).toHaveBeenCalledTimes(2);
+  expect(eng.isPlaying()).toBe(true);
+});
+
+test('tryStart respeita a preferência de mudo', () => {
+  localStorage.setItem('sith:muted', '1');
+  const el = playableMedia();
+  const eng = createAudioEngine({ createMedia: () => el, createContext: () => null });
+  eng.tryStart();
+  expect(el.play).not.toHaveBeenCalled();
+});
