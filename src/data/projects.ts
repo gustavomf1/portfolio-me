@@ -61,6 +61,56 @@ export const projects: Project[] = [
     "slot": "safecore.png"
   },
   {
+    "slug": "erp-de-leiloes",
+    "nome": "ERP de Leilões",
+    "categorias": [
+      "Backend",
+      "Frontend",
+      "Arquitetura"
+    ],
+    "destaque": true,
+    "resumo": "Lances em tempo real via WebSocket/STOMP e RabbitMQ, cache em Redis e regras financeiras transacionais.",
+    "stack": [
+      "Spring Boot",
+      "WebSocket/STOMP",
+      "RabbitMQ",
+      "Redis",
+      "Angular",
+      "RxJS",
+      "TestContainers",
+      "Docker Compose"
+    ],
+    "links": {
+      "repo": [
+        {
+          "label": "leilao-backend",
+          "url": "https://github.com/gustavomf1/leilao-backend"
+        },
+        {
+          "label": "leilao-frontend",
+          "url": "https://github.com/gustavomf1/leilao-frontend"
+        }
+      ]
+    },
+    "briefing": {
+      "contexto": "ERP para operação de leilões com lances ao vivo e gestão financeira.",
+      "desafio": "Manter consistência financeira com muitos lances concorrentes e painéis atualizados em tempo real.",
+      "construi": [
+        "Lances em tempo real com WebSocket/STOMP + RabbitMQ (AMQP).",
+        "Cache distribuído em Redis.",
+        "Regras financeiras: PIX, faturas, taxas, comissões e fechamento de leilão.",
+        "Painel admin em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB."
+      ],
+      "decisoes": [
+        "Operações financeiras com @Transactional.",
+        "Testes de integração com TestContainers.",
+        "Ambiente completo em Docker Compose."
+      ],
+      "resultado": "Fluxo de leilão completo, do lance ao fechamento financeiro."
+    },
+    "slot": "leilao.png"
+  },
+  {
     "slug": "fintrack-ai",
     "nome": "FinTrack AI",
     "categorias": [
@@ -108,103 +158,6 @@ export const projects: Project[] = [
       "resultado": "Duas funcionalidades de IA integradas ao fluxo do produto, com saída validada de ponta a ponta."
     },
     "slot": "fintrack.png"
-  },
-  {
-    "slug": "insight-flow",
-    "nome": "Insight Flow",
-    "categorias": [
-      "IA",
-      "Backend",
-      "Arquitetura"
-    ],
-    "destaque": true,
-    "resumo": "Plataforma de análise de ativos do mercado financeiro, com camada de IA multi-provedor e validador determinístico de saída.",
-    "stack": [
-      "Python",
-      "FastAPI",
-      "SQLAlchemy",
-      "Alembic",
-      "Claude",
-      "OpenAI",
-      "Ollama",
-      "JWT"
-    ],
-    "links": {
-      "repo": [
-        {
-          "label": "Insight-flow-backend",
-          "url": "https://github.com/InsightF-AI/Insight-flow-backend"
-        }
-      ]
-    },
-    "briefing": {
-      "contexto": "Projeto em equipe (organização InsightF-AI no GitHub), consumido por clientes web, mobile e desktop.",
-      "desafio": "Integrar fontes de mercado heterogêneas e diferentes provedores de LLM sem acoplar o domínio a nenhum deles.",
-      "construi": [
-        "Backend FastAPI em camadas: domain, repositories (interfaces + SQLAlchemy), services e integrations.",
-        "Integrações com brapi, Binance e BCB.",
-        "Camada de IA com abstração de provedores (Claude, OpenAI, Ollama).",
-        "Templates de prompt versionados e validador determinístico de saída (guardrails).",
-        "Scheduler, JWT/bcrypt e testes."
-      ],
-      "decisoes": [
-        "Repositórios por interface para trocar persistência sem tocar no domínio.",
-        "Prompts versionados como artefato do código.",
-        "Migrations com Alembic."
-      ],
-      "resultado": "Backend único servindo três clientes, com troca de provedor de LLM por configuração."
-    },
-    "slot": "insight-flow.png"
-  },
-  {
-    "slug": "erp-de-leiloes",
-    "nome": "ERP de Leilões",
-    "categorias": [
-      "Backend",
-      "Frontend",
-      "Arquitetura"
-    ],
-    "destaque": false,
-    "resumo": "Lances em tempo real via WebSocket/STOMP e RabbitMQ, cache em Redis e regras financeiras transacionais.",
-    "stack": [
-      "Spring Boot",
-      "WebSocket/STOMP",
-      "RabbitMQ",
-      "Redis",
-      "Angular",
-      "RxJS",
-      "TestContainers",
-      "Docker Compose"
-    ],
-    "links": {
-      "repo": [
-        {
-          "label": "leilao-backend",
-          "url": "https://github.com/gustavomf1/leilao-backend"
-        },
-        {
-          "label": "leilao-frontend",
-          "url": "https://github.com/gustavomf1/leilao-frontend"
-        }
-      ]
-    },
-    "briefing": {
-      "contexto": "ERP para operação de leilões com lances ao vivo e gestão financeira.",
-      "desafio": "Manter consistência financeira com muitos lances concorrentes e painéis atualizados em tempo real.",
-      "construi": [
-        "Lances em tempo real com WebSocket/STOMP + RabbitMQ (AMQP).",
-        "Cache distribuído em Redis.",
-        "Regras financeiras: PIX, faturas, taxas, comissões e fechamento de leilão.",
-        "Painel admin em Angular + RxJS com atualização ao vivo e cache offline em IndexedDB."
-      ],
-      "decisoes": [
-        "Operações financeiras com @Transactional.",
-        "Testes de integração com TestContainers.",
-        "Ambiente completo em Docker Compose."
-      ],
-      "resultado": "Fluxo de leilão completo, do lance ao fechamento financeiro."
-    },
-    "slot": "leilao.png"
   },
   {
     "slug": "microsservicos-event-driven",
@@ -302,84 +255,50 @@ export const projects: Project[] = [
     "slot": "logtrack.png"
   },
   {
-    "slug": "magnossao",
-    "nome": "MAGNOSSÃO",
+    "slug": "insight-flow",
+    "nome": "Insight Flow",
     "categorias": [
+      "IA",
       "Backend",
-      "Frontend"
+      "Arquitetura"
     ],
     "destaque": false,
-    "resumo": "E-commerce premium de polos (\"Raiz nórdica. Alma brasileira.\") com loja, carrinho e backoffice.",
+    "resumo": "Plataforma de análise de ativos do mercado financeiro, com camada de IA multi-provedor e validador determinístico de saída.",
     "stack": [
-      "Spring Boot",
-      "PostgreSQL",
-      "Docker",
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind"
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "Alembic",
+      "Claude",
+      "OpenAI",
+      "Ollama",
+      "JWT"
     ],
     "links": {
       "repo": [
         {
-          "label": "magnusson-back",
-          "url": "https://github.com/gustavomf1/magnusson-back"
-        },
-        {
-          "label": "magnusson-front",
-          "url": "https://github.com/gustavomf1/magnusson-front"
+          "label": "Insight-flow-backend",
+          "url": "https://github.com/InsightF-AI/Insight-flow-backend"
         }
       ]
     },
     "briefing": {
-      "contexto": "Loja virtual de uma marca de polos com posicionamento premium.",
-      "desafio": "Entregar vitrine, carrinho e gestão da loja com a mesma base.",
+      "contexto": "Projeto em equipe (organização InsightF-AI no GitHub), consumido por clientes web, mobile e desktop.",
+      "desafio": "Integrar fontes de mercado heterogêneas e diferentes provedores de LLM sem acoplar o domínio a nenhum deles.",
       "construi": [
-        "Backend Spring Boot + PostgreSQL + Docker, com health check e testes.",
-        "Frontend Next.js + React + TypeScript + Tailwind com carrinho.",
-        "Backoffice em Next.js."
+        "Backend FastAPI em camadas: domain, repositories (interfaces + SQLAlchemy), services e integrations.",
+        "Integrações com brapi, Binance e BCB.",
+        "Camada de IA com abstração de provedores (Claude, OpenAI, Ollama).",
+        "Templates de prompt versionados e validador determinístico de saída (guardrails).",
+        "Scheduler, JWT/bcrypt e testes."
       ],
       "decisoes": [
-        "Loja e backoffice como aplicações separadas consumindo a mesma API."
+        "Repositórios por interface para trocar persistência sem tocar no domínio.",
+        "Prompts versionados como artefato do código.",
+        "Migrations com Alembic."
       ],
-      "resultado": "E-commerce completo, da vitrine à administração."
+      "resultado": "Backend único servindo três clientes, com troca de provedor de LLM por configuração."
     },
-    "slot": "magnossao.png"
-  },
-  {
-    "slug": "holonet-planets",
-    "nome": "Holonet Planets",
-    "categorias": [
-      "Backend",
-      "Frontend"
-    ],
-    "destaque": false,
-    "resumo": "API Spring Boot de planetas da galáxia, com frontend em Next.js + Tailwind. O projeto temático da casa.",
-    "stack": [
-      "Spring Boot",
-      "Next.js",
-      "Tailwind"
-    ],
-    "links": {
-      "repo": [
-        {
-          "label": "project-starwars",
-          "url": "https://github.com/gustavomf1/project-starwars"
-        }
-      ]
-    },
-    "briefing": {
-      "contexto": "Projeto temático: um catálogo de planetas servido por API própria.",
-      "desafio": "Construir API e interface simples, bem estruturadas e agradáveis de navegar.",
-      "construi": [
-        "API REST em Spring Boot.",
-        "Frontend em Next.js + Tailwind."
-      ],
-      "decisoes": [
-        "Separação clara entre API e cliente."
-      ],
-      "resultado": "Um arquivo da Holonet pronto para consulta."
-    },
-    "slot": "holonet.png"
+    "slot": "insight-flow.png"
   }
 ];
