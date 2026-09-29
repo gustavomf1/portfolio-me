@@ -17,7 +17,7 @@ export const profile = {
   numeros: [
     { valor: 8, sufixo: '+', decimais: 0, rotulo: 'projetos próprios' },
     { valor: 2, sufixo: '+', decimais: 0, rotulo: 'integrações com IA em produção' },
-    { valor: 1.5, sufixo: '+', decimais: 1, rotulo: 'anos de experiência prática' },
+    { valor: 2, sufixo: '+', decimais: 1, rotulo: 'anos de experiência prática' },
     { valor: 20, sufixo: '+', decimais: 0, rotulo: 'tecnologias no dia a dia' },
   ],
 } as const;
