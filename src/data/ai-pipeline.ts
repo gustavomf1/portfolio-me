@@ -15,4 +15,4 @@ export const aiLearnings = [
 ];
 
 // Categorias aceitas pela mini demo simulada (sem chamar API).
-export const demoCategorias = ['Alimentação', 'Transporte', 'Moradia', 'Lazer', 'Saúde', 'Outros'] as const;
+export const demoCategorias = ['Alimentação', 'Transporte', 'Moradia', 'Saúde', 'Lazer', 'Educação', 'Assinaturas', 'Outros'] as const;

@@ -69,3 +69,5 @@ a:hover { color: var(--color-bone); }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes modalIn { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
 @keyframes blink { 50% { opacity: 0; } }
+
+@keyframes pipelinePulse { 0%, 100% { transform: scaleX(0); opacity: 0; } 20%, 40% { transform: scaleX(1); opacity: 1; } 60% { transform: scaleX(1); opacity: 0; } }
