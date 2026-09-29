@@ -279,7 +279,8 @@ export const projects: Project[] = [
           "label": "logtrack",
           "url": "https://github.com/gustavomf1/logtrack"
         }
-      ]
+      ],
+      "demo": "https://logtrack.gustavo-mf1.workers.dev/"
     },
     "briefing": {
       "contexto": "Projeto full stack com hardware (IoT) para rastrear lotes em logística e almoxarifado.",
@@ -295,7 +296,17 @@ export const projects: Project[] = [
       ],
       "resultado": "Fluxo completo do leitor RFID até a tela."
     },
-    "slot": "logtrack.png"
+    "slot": "logtrack.png",
+    "prints": [
+      {
+        "src": "/assets/projects/logtrack-1-visao-geral.png",
+        "alt": "Painel Visão geral do LogTrack com lotes no estoque, localizados, sem zona e em atenção"
+      },
+      {
+        "src": "/assets/projects/logtrack-2-login.png",
+        "alt": "Tela de login do LogTrack, com leitor RFID em um armazém"
+      }
+    ]
   },
   {
     "slug": "insight-flow",
