@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { profile } from '@/data/profile';
 import { useAudio } from '@/lib/useAudio';
+import { track } from '@/lib/analytics';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
@@ -46,6 +47,7 @@ export function Comunicacao() {
               rel="noopener noreferrer"
               download={l.download ? true : undefined}
               onMouseEnter={() => play('blip')}
+              onClick={() => track('clique_contato', { canal: l.k.toLowerCase() })}
               className={`${linhaClasse} transition-all hover:bg-blood/15 hover:pl-3.5`}
               style={linhaCols}
             >
